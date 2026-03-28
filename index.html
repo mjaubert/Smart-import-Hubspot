@@ -14,8 +14,6 @@
   --r:12px;--rl:18px;--rxl:24px;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-
-/* BG */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:44px 44px}
 .orb{position:absolute;border-radius:50%;filter:blur(100px);transition:transform 1.6s cubic-bezier(.22,1,.36,1)}
@@ -23,15 +21,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .o2{width:650px;height:650px;background:radial-gradient(circle,rgba(99,102,241,.12),transparent 65%);bottom:-200px;right:-200px}
 .o3{width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,.08),transparent 65%);top:35%;left:38%}
 .app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
-
-/* HEADER */
 header{padding:16px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b);backdrop-filter:blur(20px);background:rgba(8,8,14,.8);position:sticky;top:0;z-index:50}
 .logo{display:flex;align-items:center;gap:12px}
 .logo-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--a),var(--a2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 16px rgba(255,122,89,.3)}
 .logo-name{font-size:15px;font-weight:700;letter-spacing:-.3px}
 .logo-name em{font-style:normal;background:linear-gradient(135deg,var(--a),var(--a3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-
-/* BUTTONS */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 20px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .18s;white-space:nowrap;letter-spacing:-.1px}
 .btn-primary{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;box-shadow:0 4px 16px rgba(255,122,89,.28)}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,122,89,.42)}
@@ -43,16 +37,10 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .btn-danger:hover{background:rgba(248,113,113,.15)}
 .btn-sm{padding:6px 13px;font-size:12px;border-radius:9px}
 .btn-lg{padding:13px 28px;font-size:15px;border-radius:14px}
-
-/* CTA ready state */
 #send-btn:not(:disabled){padding:8px 20px;font-size:13.5px;box-shadow:0 4px 20px rgba(255,122,89,.45),0 0 0 1px rgba(255,122,89,.2)}
 #send-btn:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,122,89,.55)}
-
-/* VIEWS */
 .view{display:none;flex:1;flex-direction:column}
 .view.active{display:flex}
-
-/* HOME */
 .home{padding:56px 32px 48px;flex:1;max-width:860px;width:100%;margin:0 auto}
 .hero{text-align:center;margin-bottom:56px}
 .hero h2{font-size:44px;font-weight:800;letter-spacing:-2px;line-height:1.1;margin-bottom:14px}
@@ -65,8 +53,6 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .stat-l{font-size:11px;color:var(--t3);margin-top:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
 .sec-title{font-size:13px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px;color:var(--t2);text-transform:uppercase;letter-spacing:.06em}
 .sec-badge{background:rgba(255,122,89,.15);color:var(--a);font-size:11px;padding:2px 9px;border-radius:999px;font-weight:700}
-
-/* IN-PROGRESS */
 .inprogress-list{margin-bottom:28px;display:flex;flex-direction:column;gap:10px}
 .ip-card{background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(139,92,246,.08));border:1px solid rgba(99,102,241,.25);border-radius:var(--rl);padding:18px 22px;display:flex;align-items:flex-start;gap:16px;animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
@@ -83,8 +69,6 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .ip-by{font-size:12px;color:var(--t3);margin-bottom:7px}
 .ip-msg{font-size:13px;color:var(--t2);line-height:1.6}
 .ip-msg strong{color:#a5b4fc;font-weight:600}
-
-/* HISTORY */
 .hist-scroll{max-height:480px;overflow-y:auto;padding-right:4px}
 .hist-scroll::-webkit-scrollbar{width:4px}
 .hist-scroll::-webkit-scrollbar-track{background:transparent}
@@ -116,8 +100,6 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .btbl tr:last-child td{border-bottom:none}
 .s-ok{color:#34d399!important;font-weight:600}
 .s-err{color:var(--err)!important;font-weight:600}
-
-/* OVERLAYS */
 .overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.78);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:20px}
 .overlay.open{display:flex}
 .modal{background:linear-gradient(160deg,#13131f,#0f0f18);border:1px solid rgba(255,255,255,.1);border-radius:var(--rxl);padding:40px;width:100%;max-width:480px;box-shadow:0 40px 80px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.04) inset;animation:mIn .28s cubic-bezier(.34,1.46,.64,1)}
@@ -135,8 +117,6 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .fi.err{border-color:var(--err)!important;background:rgba(248,113,113,.06)!important;box-shadow:0 0 0 3px rgba(248,113,113,.1)!important}
 .modal-actions{display:flex;gap:10px;margin-top:20px}
 .modal-actions .btn{flex:1;padding:12px}
-
-/* CUSTOM SELECT */
 .sel-wrap{position:relative}
 .sel-trigger{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:var(--r);padding:13px 16px;color:var(--t);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:all .18s;user-select:none}
 .sel-trigger:hover{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.07)}
@@ -159,8 +139,6 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .sel-opt.selected{background:rgba(255,122,89,.15);color:var(--a);font-weight:600}
 .sel-opt .ck{opacity:0;font-size:12px}
 .sel-opt.selected .ck{opacity:1}
-
-/* IMPORT VIEW */
 .imp-bar{display:flex;align-items:center;gap:12px;padding:14px 32px;border-bottom:1px solid var(--b);backdrop-filter:blur(20px);background:rgba(8,8,14,.8);flex-wrap:wrap}
 .back{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:16px;transition:all .18s;flex-shrink:0}
 .back:hover{background:rgba(255,255,255,.12);color:var(--t);border-color:rgba(255,122,89,.3)}
@@ -168,8 +146,6 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .imp-title-txt{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .imp-by{font-size:12px;color:var(--t3);margin-top:2px}
 .imp-acts{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;align-items:center}
-
-/* CSV UPLOAD */
 .csv-drop{position:relative;cursor:pointer;display:inline-block}
 .csv-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .csv-drop-inner{display:flex;align-items:center;gap:8px;padding:6px 13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:9px;font-size:12px;font-weight:600;color:var(--t2);transition:all .18s;user-select:none;white-space:nowrap}
@@ -199,8 +175,6 @@ td.ac{width:38px;text-align:center}
 .footer-bar{display:flex;align-items:center;justify-content:space-between;padding:11px 32px;background:rgba(8,8,14,.85);border-top:1px solid var(--b);font-size:12px;color:var(--t3);flex-wrap:wrap;gap:8px}
 .empty-state{text-align:center;padding:64px 24px;color:var(--t3)}
 .empty-state p{font-size:14px;margin-top:8px}
-
-/* TABLE SELECT */
 .tsel-wrap{position:relative}
 .tsel-trigger{width:100%;background:rgba(255,255,255,.05);border:1px solid transparent;border-radius:8px;padding:7px 10px;color:var(--t);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:6px;transition:all .14s;user-select:none}
 .tsel-trigger:hover{border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.08)}
@@ -220,8 +194,6 @@ td.ac{width:38px;text-align:center}
 .tsel-opt{padding:7px 10px;border-radius:7px;cursor:pointer;font-size:12px;color:var(--t2);transition:all .1s;display:flex;align-items:center;justify-content:space-between}
 .tsel-opt:hover{background:rgba(255,122,89,.1);color:var(--t)}
 .tsel-opt.sel{background:rgba(255,122,89,.15);color:var(--a);font-weight:600}
-
-/* CSV MAPPING */
 .map-modal{max-width:560px}
 .map-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
 .map-row{display:grid;grid-template-columns:1fr 32px 1fr;align-items:center;gap:10px}
@@ -236,8 +208,6 @@ td.ac{width:38px;text-align:center}
 .map-target .star{color:var(--err);margin-left:3px;font-size:11px}
 .map-target .opt-tag{color:rgba(165,180,252,.6);font-size:11px;font-weight:500;margin-left:4px}
 .map-divider{height:1px;background:rgba(255,255,255,.06);margin:20px 0}
-
-/* OWNER BLOCK */
 .owner-block{background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(139,92,246,.06));border:1px solid rgba(99,102,241,.22);border-radius:var(--rl);padding:20px 22px}
 .owner-block-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .owner-block-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,rgba(99,102,241,.3),rgba(139,92,246,.2));border:1px solid rgba(99,102,241,.3);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
@@ -270,13 +240,7 @@ td.ac{width:38px;text-align:center}
 .owner-opt.sel .owner-opt-ck{opacity:1}
 .owner-err{font-size:12px;color:var(--err);margin-top:8px;display:none}
 .owner-err.show{display:block}
-
-/* ══════════════════════════════
-   MULTI-STEP CONFIG MODAL
-══════════════════════════════ */
 .cfg-modal{max-width:500px}
-
-/* Progress bar */
 .cfg-progress{display:flex;align-items:center;gap:0;margin-bottom:32px}
 .cfg-step-dot{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;flex:1}
 .cfg-step-dot:not(:last-child)::after{content:'';position:absolute;top:14px;left:50%;width:100%;height:2px;background:rgba(255,255,255,.08);z-index:0}
@@ -287,19 +251,14 @@ td.ac{width:38px;text-align:center}
 .cfg-dot-label{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;text-align:center;white-space:nowrap}
 .cfg-step-dot.active .cfg-dot-label{color:var(--a)}
 .cfg-step-dot.done .cfg-dot-label{color:var(--ok)}
-
-/* Step panels */
 .cfg-panel{display:none;animation:panelIn .22s ease}
 .cfg-panel.active{display:block}
 @keyframes panelIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
 @keyframes panelBack{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
 .cfg-panel.back{animation:panelBack .22s ease}
-
 .cfg-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);margin-bottom:8px}
 .cfg-title{font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--t);margin-bottom:6px}
 .cfg-desc{font-size:13px;color:var(--t3);line-height:1.6;margin-bottom:24px}
-
-/* Toggle option */
 .tog-row{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r);border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);cursor:pointer;user-select:none;transition:all .18s}
 .tog-row:hover{background:rgba(255,255,255,.055);border-color:rgba(255,122,89,.2)}
 .tog-row.on{background:rgba(255,122,89,.07);border-color:rgba(255,122,89,.25)}
@@ -310,14 +269,10 @@ td.ac{width:38px;text-align:center}
 .tog-row.on .tog-switch{background:var(--a);border-color:var(--a);box-shadow:0 2px 10px rgba(255,122,89,.35)}
 .tog-knob{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .tog-row.on .tog-knob{transform:translateX(18px)}
-
-/* Filter rules list */
 .filter-rules{margin-top:14px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);overflow:hidden}
 .filter-rule{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;color:var(--t2)}
 .filter-rule:last-child{border-bottom:none}
 .filter-rule::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(16,185,129,.5);flex-shrink:0}
-
-/* Review step */
 .review-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .review-row:last-child{border-bottom:none}
 .review-label{font-size:13px;color:var(--t3)}
@@ -329,8 +284,6 @@ td.ac{width:38px;text-align:center}
 .info-block{display:flex;align-items:flex-start;gap:9px;padding:11px 14px;background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:var(--r);margin-top:14px}
 .info-block p{font-size:12px;color:var(--t3);line-height:1.6}
 .info-block p strong{color:#34d399;font-weight:600}
-
-/* TOASTS */
 .tw{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:999}
 .toast{padding:12px 18px;border-radius:var(--r);font-size:13px;font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,.55);animation:tIn .3s cubic-bezier(.34,1.46,.64,1);max-width:320px;backdrop-filter:blur(16px)}
 .toast.success{background:rgba(6,78,59,.95);color:#34d399;border:1px solid rgba(52,211,153,.2)}
@@ -363,8 +316,6 @@ td.ac{width:38px;text-align:center}
         <p>Import smarter leads into HubSpot — clean, enriched, and ready to prospect.</p>
         <button class="btn btn-primary btn-lg" onclick="openNewModal()">＋ Start a new import</button>
       </div>
-
-      <!-- VALUE PROPS -->
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:52px">
         <div style="background:rgba(255,255,255,.035);border:1px solid var(--b);border-radius:var(--rl);padding:22px 20px;transition:all .25s" onmouseover="this.style.borderColor='rgba(255,122,89,.25)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,.35)'" onmouseout="this.style.borderColor='';this.style.transform='';this.style.boxShadow=''">
           <div style="font-size:22px;margin-bottom:12px">🎯</div>
@@ -382,7 +333,6 @@ td.ac{width:38px;text-align:center}
           <div style="font-size:13px;color:var(--t3);line-height:1.6">Existing contacts are updated, not duplicated. Your pipeline stays clean.</div>
         </div>
       </div>
-
       <div class="stats">
         <div class="stat"><div class="stat-n" id="s-imp">0</div><div class="stat-l">Total imports</div></div>
         <div class="stat"><div class="stat-n" id="s-leads">0</div><div class="stat-l">Leads sent</div></div>
@@ -390,8 +340,6 @@ td.ac{width:38px;text-align:center}
       </div>
       <div class="inprogress-list" id="inprogress-list"></div>
       <div class="sec-title" style="margin-bottom:12px">Import history <span class="sec-badge" id="hist-badge">0</span></div>
-
-      <!-- FILTERS BAR -->
       <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
         <input id="f-search" type="text" placeholder="🔍 Search by import name…" oninput="filterHist()"
           style="flex:1;min-width:180px;background:rgba(255,255,255,.05);border:1px solid var(--b2);border-radius:9px;padding:8px 14px;color:var(--t);font-size:13px;outline:none;font-family:inherit;transition:all .15s"
@@ -407,7 +355,6 @@ td.ac{width:38px;text-align:center}
             <div class="sel-list" id="f-user-list"></div>
           </div>
         </div>
-        <!-- Custom date picker -->
         <div style="position:relative" id="cal-wrap">
           <div id="cal-trigger" onclick="toggleCal()" style="display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(255,255,255,.05);border:1px solid var(--b2);border-radius:9px;font-size:13px;color:var(--t3);cursor:pointer;transition:all .15s;user-select:none;white-space:nowrap"
             onmouseover="this.style.borderColor='rgba(255,122,89,.3)'" onmouseout="if(!calOpen)this.style.borderColor=''">
@@ -416,24 +363,20 @@ td.ac{width:38px;text-align:center}
             <span id="cal-clear" onclick="event.stopPropagation();clearCalDate()" style="display:none;margin-left:4px;color:var(--t3);font-size:11px">✕</span>
           </div>
           <div id="cal-dd" style="display:none;position:absolute;top:calc(100% + 6px);left:0;background:#13131f;border:1px solid rgba(255,255,255,.1);border-radius:var(--rl);box-shadow:0 16px 48px rgba(0,0,0,.65);z-index:300;padding:16px;min-width:260px;animation:ddIn .18s">
-            <!-- Month nav -->
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
               <button onclick="calNav(-1)" style="background:rgba(255,255,255,.07);border:1px solid var(--b);border-radius:8px;width:28px;height:28px;color:var(--t2);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">‹</button>
               <span id="cal-month-label" style="font-size:13px;font-weight:700;color:var(--t)"></span>
               <button onclick="calNav(1)" style="background:rgba(255,255,255,.07);border:1px solid var(--b);border-radius:8px;width:28px;height:28px;color:var(--t2);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">›</button>
             </div>
-            <!-- Day headers -->
             <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px">
               ${['Mo','Tu','We','Th','Fr','Sa','Su'].map(d=>`<div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">${d}</div>`).join('')}
             </div>
-            <!-- Days grid -->
             <div id="cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px"></div>
           </div>
         </div>
         <button onclick="clearFilters()" style="background:rgba(255,255,255,.05);border:1px solid var(--b);border-radius:9px;padding:8px 14px;color:var(--t3);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s"
           onmouseover="this.style.color='var(--t)'" onmouseout="this.style.color='var(--t3)'">✕ Clear</button>
       </div>
-
       <div class="hist-scroll">
         <div id="hist-list"></div>
         <div class="hist-empty" id="hist-empty"><div class="ei">📭</div><p>No imports yet. Start your first one above.</p></div>
@@ -457,7 +400,7 @@ td.ac{width:38px;text-align:center}
         </label>
         <button class="btn btn-ghost btn-sm" onclick="addRow()">＋ Add row</button>
         <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑</button>
-        <button class="btn btn-primary btn-sm" id="send-btn" onclick="openCfgModal()" disabled title="Import setup is not complete yet. Please fill all required fields before continuing.">⚙️ Configure import in CRM</button>
+        <button class="btn btn-primary btn-sm" id="send-btn" onclick="openCfgModal()" disabled title="Fill all required fields first">⚙️ Configure import in CRM</button>
       </div>
     </div>
     <div class="pb"><div class="pf" id="progress"></div></div>
@@ -580,28 +523,12 @@ td.ac{width:38px;text-align:center}
 <!-- MULTI-STEP CONFIG MODAL -->
 <div class="overlay" id="modal-cfg">
   <div class="modal cfg-modal">
-
-    <!-- Progress indicator -->
     <div class="cfg-progress">
-      <div class="cfg-step-dot active" id="sdot-1">
-        <div class="cfg-dot" id="sdot-n1">1</div>
-        <div class="cfg-dot-label">Qualification</div>
-      </div>
-      <div class="cfg-step-dot" id="sdot-2">
-        <div class="cfg-dot" id="sdot-n2">2</div>
-        <div class="cfg-dot-label">Enrichment</div>
-      </div>
-      <div class="cfg-step-dot" id="sdot-3">
-        <div class="cfg-dot" id="sdot-n3">3</div>
-        <div class="cfg-dot-label">Filtering</div>
-      </div>
-      <div class="cfg-step-dot" id="sdot-4">
-        <div class="cfg-dot" id="sdot-n4">4</div>
-        <div class="cfg-dot-label">Review</div>
-      </div>
+      <div class="cfg-step-dot active" id="sdot-1"><div class="cfg-dot" id="sdot-n1">1</div><div class="cfg-dot-label">Qualification</div></div>
+      <div class="cfg-step-dot" id="sdot-2"><div class="cfg-dot" id="sdot-n2">2</div><div class="cfg-dot-label">Enrichment</div></div>
+      <div class="cfg-step-dot" id="sdot-3"><div class="cfg-dot" id="sdot-n3">3</div><div class="cfg-dot-label">Filtering</div></div>
+      <div class="cfg-step-dot" id="sdot-4"><div class="cfg-dot" id="sdot-n4">4</div><div class="cfg-dot-label">Review</div></div>
     </div>
-
-    <!-- STEP 1 — Qualification -->
     <div class="cfg-panel active" id="cfg-panel-1">
       <div class="cfg-eyebrow">Step 1 of 4</div>
       <div class="cfg-title">Qualification</div>
@@ -618,8 +545,6 @@ td.ac{width:38px;text-align:center}
         <button class="btn btn-primary" onclick="goStep(2)">Next →</button>
       </div>
     </div>
-
-    <!-- STEP 2 — Enrichment -->
     <div class="cfg-panel" id="cfg-panel-2">
       <div class="cfg-eyebrow">Step 2 of 4</div>
       <div class="cfg-title">Enrichment</div>
@@ -636,8 +561,6 @@ td.ac{width:38px;text-align:center}
         <button class="btn btn-primary" onclick="goStep(3)">Next →</button>
       </div>
     </div>
-
-    <!-- STEP 3 — Filtering -->
     <div class="cfg-panel" id="cfg-panel-3">
       <div class="cfg-eyebrow">Step 3 of 4</div>
       <div class="cfg-title">Availability</div>
@@ -660,29 +583,16 @@ td.ac{width:38px;text-align:center}
         <button class="btn btn-primary" onclick="goStep(4)">Next →</button>
       </div>
     </div>
-
-    <!-- STEP 4 — Review -->
     <div class="cfg-panel" id="cfg-panel-4">
       <div class="cfg-eyebrow">Step 4 of 4</div>
       <div class="cfg-title">Review & confirm</div>
       <div class="cfg-desc">Here's a summary of your import configuration. Everything looks good?</div>
-
-      <div class="review-section">
+      <div class="review-section" id="rv-section">
         <div class="review-section-title">Configuration</div>
-        <div class="review-row">
-          <span class="review-label">Persona Match</span>
-          <span class="review-val" id="rv-persona">—</span>
-        </div>
-        <div class="review-row">
-          <span class="review-label">Enrich phone number</span>
-          <span class="review-val" id="rv-phone">—</span>
-        </div>
-        <div class="review-row">
-          <span class="review-label">Available contacts only</span>
-          <span class="review-val" id="rv-avail">—</span>
-        </div>
+        <div class="review-row"><span class="review-label">Persona Match</span><span class="review-val" id="rv-persona">—</span></div>
+        <div class="review-row"><span class="review-label">Enrich phone number</span><span class="review-val" id="rv-phone">—</span></div>
+        <div class="review-row"><span class="review-label">Available contacts only</span><span class="review-val" id="rv-avail">—</span></div>
       </div>
-
       <div class="review-section" id="rv-filters-block" style="display:none">
         <div class="review-section-title">Active filters</div>
         <div class="filter-rule">Not associated to client companies</div>
@@ -690,29 +600,19 @@ td.ac{width:38px;text-align:center}
         <div class="filter-rule">Not associated to companies with open deals</div>
         <div class="filter-rule">Not already worked by another BDR</div>
       </div>
-
-      <div class="info-block">
-        <span style="font-size:15px;flex-shrink:0">🔗</span>
-        <p><strong>Contacts will automatically be linked to their company in the CRM.</strong></p>
-      </div>
-      <div class="info-block" style="margin-top:8px">
-        <span style="font-size:15px;flex-shrink:0">🔒</span>
-        <p><strong>No duplicates will be created.</strong> If a contact already exists in the CRM, it will be updated instead of being recreated.</p>
-      </div>
-
+      <div class="info-block"><span style="font-size:15px;flex-shrink:0">🔗</span><p><strong>Contacts will automatically be linked to their company in the CRM.</strong></p></div>
+      <div class="info-block" style="margin-top:8px"><span style="font-size:15px;flex-shrink:0">🔒</span><p><strong>No duplicates will be created.</strong> If a contact already exists in the CRM, it will be updated instead of being recreated.</p></div>
       <div class="modal-actions">
         <button class="btn btn-ghost" onclick="goStep(3,'back')">← Back</button>
         <button class="btn btn-primary" onclick="confirmCfg()">Confirm import →</button>
       </div>
     </div>
-
   </div>
 </div>
 
 <div class="tw" id="tw"></div>
 
 <script>
-const WEBHOOK='https://api.clay.com/v3/sources/webhook/pull-in-data-from-a-webhook-be430a93-c9a6-4222-832b-fff68466e1ee';
 const BYPASS='HQ5JV0qhkuqeoAAcOy1vaNIWgxac1dRn';
 const USERS=[
   {name:"Aisha Roukhamieh-Mckinna",id:76163167},{name:"Alessandro De Valerio",id:88036749},
@@ -758,13 +658,56 @@ const USERS=[
   {name:"Christophe HOAREAU",id:90604097},
 ];
 
-let leads=[],idc=0,importName='',importedBy='',importCode='',hist=[];
+let leads=[],idc=0,importName='',importedBy='',hist=[];
 let csvRawHeaders=[],csvRawRows=[],ownerPickVal='';
 let activeJobs=[];
 let cfg={personaMatch:true,enrichPhone:false,availableOnly:true};
 let cfgStep=1;
 
 try{hist=JSON.parse(localStorage.getItem('hs_v11')||'[]');}catch{}
+
+// ── CALENDAR ──────────────────────────────────────────
+let calOpen=false,calYear=new Date().getFullYear(),calMonth=new Date().getMonth(),calSelected='';
+function toggleCal(){calOpen=!calOpen;const dd=document.getElementById('cal-dd');dd.style.display=calOpen?'block':'none';if(calOpen){calYear=new Date().getFullYear();calMonth=new Date().getMonth();renderCal();}}
+function calNav(d){calMonth+=d;if(calMonth>11){calMonth=0;calYear++;}else if(calMonth<0){calMonth=11;calYear--;}renderCal();}
+function renderCal(){
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month-label').textContent=months[calMonth]+' '+calYear;
+  const first=new Date(calYear,calMonth,1).getDay();
+  const days=new Date(calYear,calMonth+1,0).getDate();
+  const offset=(first===0?6:first-1);
+  let html='';
+  for(let i=0;i<offset;i++)html+='<div></div>';
+  for(let d=1;d<=days;d++){
+    const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const sel=ds===calSelected;
+    html+=`<div onclick="pickCalDay('${ds}')" style="text-align:center;padding:5px 2px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:${sel?700:400};color:${sel?'var(--a)':'var(--t2)'};background:${sel?'rgba(255,122,89,.15)':'transparent'};transition:all .1s" onmouseover="this.style.background=this.style.background||'rgba(255,255,255,.06)'" onmouseout="this.style.background='${sel?'rgba(255,122,89,.15)':'transparent'}'}">${d}</div>`;
+  }
+  document.getElementById('cal-grid').innerHTML=html;
+}
+function pickCalDay(ds){
+  calSelected=ds;
+  const [y,m,d]=ds.split('-');
+  document.getElementById('cal-label').textContent=`${d}/${m}/${y}`;
+  document.getElementById('cal-clear').style.display='inline';
+  document.getElementById('cal-trigger').style.borderColor='rgba(255,122,89,.4)';
+  calOpen=false;document.getElementById('cal-dd').style.display='none';
+  filterHist();
+}
+function clearCalDate(){
+  calSelected='';
+  document.getElementById('cal-label').textContent='Filter by date…';
+  document.getElementById('cal-clear').style.display='none';
+  document.getElementById('cal-trigger').style.borderColor='';
+  filterHist();
+}
+document.addEventListener('click',e=>{
+  if(calOpen&&!document.getElementById('cal-wrap')?.contains(e.target)){calOpen=false;document.getElementById('cal-dd').style.display='none';}
+  if(!document.getElementById('f-user-wrap')?.contains(e.target)){document.getElementById('f-user-dd').style.display='none';document.getElementById('f-user-trig')?.classList.remove('open');}
+  if(!document.getElementById('modal-sel-wrap')?.contains(e.target)){document.getElementById('modal-sel-dd').style.display='none';document.getElementById('modal-sel-trig')?.classList.remove('open');}
+  if(!document.getElementById('owner-pick-wrap')?.contains(e.target)){document.getElementById('owner-dd').style.display='none';document.getElementById('owner-pick-trig')?.classList.remove('open');}
+  if(!e.target.closest('.tsel-wrap'))closeTsel();
+});
 
 // PARALLAX
 document.addEventListener('mousemove',e=>{
@@ -774,24 +717,7 @@ document.addEventListener('mousemove',e=>{
   document.getElementById('o3').style.transform=`translate(${x*.4}px,${y*.4}px)`;
 });
 
-// CLOSE DROPDOWNS
-document.addEventListener('click',e=>{
-  if(!document.getElementById('f-user-wrap')?.contains(e.target)){
-    document.getElementById('f-user-dd').style.display='none';
-    document.getElementById('f-user-trig')?.classList.remove('open');
-  }
-  if(!document.getElementById('modal-sel-wrap')?.contains(e.target)){
-    document.getElementById('modal-sel-dd').style.display='none';
-    document.getElementById('modal-sel-trig')?.classList.remove('open');
-  }
-  if(!document.getElementById('owner-pick-wrap')?.contains(e.target)){
-    document.getElementById('owner-dd').style.display='none';
-    document.getElementById('owner-pick-trig')?.classList.remove('open');
-  }
-  if(!e.target.closest('.tsel-wrap'))closeTsel();
-});
-
-// MODAL SELECT — Created by
+// ── MODAL SELECT — Created by ──────────────────────────
 let mSelVal='';
 function buildMSelList(f=''){
   const items=USERS.filter(u=>!f||u.name.toLowerCase().includes(f.toLowerCase()));
@@ -812,7 +738,7 @@ function pickMSel(u){
   document.getElementById('modal-sel-dd').style.display='none';buildMSelList();
 }
 
-// NEW IMPORT MODAL
+// ── NEW IMPORT MODAL ──────────────────────────────────
 function openNewModal(){
   mSelVal='';
   document.getElementById('m-name').value='';
@@ -820,6 +746,7 @@ function openNewModal(){
   document.getElementById('modal-sel-trig').classList.remove('err','open');
   const vEl=document.getElementById('modal-sel-val');vEl.textContent='— Select your name —';vEl.classList.add('sel-ph');
   document.getElementById('modal-sel-dd').style.display='none';
+  const errEl=document.getElementById('m-name-err');if(errEl)errEl.remove();
   buildMSelList();
   document.getElementById('modal-new').classList.add('open');
   setTimeout(()=>document.getElementById('m-name').focus(),120);
@@ -830,21 +757,17 @@ function confirmNew(){
   document.getElementById('m-name').classList.toggle('err',!n);if(!n)ok=false;
   document.getElementById('modal-sel-trig').classList.toggle('err',!mSelVal);if(!mSelVal)ok=false;
   if(!ok)return;
-  // Prevent duplicate import names
-  const duplicate=hist.some(b=>b.name.trim().toLowerCase()===n.toLowerCase());
-  if(duplicate){
+  const dup=hist.some(b=>b.name.trim().toLowerCase()===n.toLowerCase());
+  if(dup){
     document.getElementById('m-name').classList.add('err');
-    document.getElementById('m-name').setCustomValidity('duplicate');
-    // show inline error
     let errEl=document.getElementById('m-name-err');
     if(!errEl){errEl=document.createElement('div');errEl.id='m-name-err';errEl.style.cssText='font-size:12px;color:var(--err);margin-top:6px';document.getElementById('m-name').after(errEl);}
     errEl.textContent='An import with this name already exists. Please choose a different name.';
     return;
   }
-  const errEl=document.getElementById('m-name-err');if(errEl)errEl.remove();
+  const errEl2=document.getElementById('m-name-err');if(errEl2)errEl2.remove();
   closeNew();
   importName=n;importedBy=mSelVal;leads=[];idc=0;
-  importCode='IMP-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
   resetCsvZone();
   document.getElementById('imp-title').textContent=n;
   document.getElementById('imp-by').textContent='By '+importedBy;
@@ -853,7 +776,7 @@ function confirmNew(){
   render();
 }
 
-// CSV
+// ── CSV ────────────────────────────────────────────────
 function resetCsvZone(){
   document.getElementById('csv-input').value='';
   document.getElementById('csv-fname').textContent='Import CSV';
@@ -880,7 +803,7 @@ function parseCSVFile(file){
 }
 function parseCSVLine(l){const r=[];let c='',q=false;for(const ch of l){if(ch==='"'){q=!q;}else if(ch===','&&!q){r.push(c);c='';}else c+=ch;}r.push(c);return r;}
 
-// OWNER PICKER
+// ── OWNER PICKER ───────────────────────────────────────
 function initials(n){const p=n.trim().split(/\s+/);return((p[0]?.[0]||'')+(p[1]?.[0]||'')).toUpperCase();}
 function buildOwnerList(f=''){
   const items=USERS.filter(u=>!f||u.name.toLowerCase().includes(f.toLowerCase()));
@@ -908,7 +831,7 @@ function pickOwner(u){
   buildOwnerList();
 }
 
-// CSV MAPPING
+// ── CSV MAPPING ────────────────────────────────────────
 const MAP_ALIASES={
   firstName:['firstname','prenom','prénom','first','givenname','first_name'],
   lastName:['lastname','nom','last','surname','familyname','last_name'],
@@ -968,45 +891,28 @@ function confirmMap(){
   render();toast(n+' lead'+(n!==1?'s':'')+' imported','success');
 }
 
-// MULTI-STEP CONFIG MODAL
+// ── MULTI-STEP CONFIG MODAL ────────────────────────────
 function openCfgModal(){
   cfgStep=1;
-  // Reset toggles to match current cfg
   syncToggles();
-  renderCfgStep(1,false);
+  renderCfgStep(1);
   document.getElementById('modal-cfg').classList.add('open');
 }
 function closeCfg(){document.getElementById('modal-cfg').classList.remove('open');}
-
 function syncToggles(){
   setToggle('tog-persona',cfg.personaMatch);
   setToggle('tog-phone',cfg.enrichPhone);
   setToggle('tog-avail',cfg.availableOnly);
   updateFilterRulesVis();
 }
-function setToggle(id,on){
-  const row=document.getElementById(id);
-  if(on)row.classList.add('on');else row.classList.remove('on');
-}
-function toggleCfg(key,rowId){
-  cfg[key]=!cfg[key];
-  setToggle(rowId,cfg[key]);
-}
-function toggleCfgAvail(){
-  cfg.availableOnly=!cfg.availableOnly;
-  setToggle('tog-avail',cfg.availableOnly);
-  updateFilterRulesVis();
-}
-function updateFilterRulesVis(){
-  const fr=document.getElementById('filter-rules');
-  if(fr)fr.style.opacity=cfg.availableOnly?'1':'0.3';
-}
-
+function setToggle(id,on){const row=document.getElementById(id);if(on)row.classList.add('on');else row.classList.remove('on');}
+function toggleCfg(key,rowId){cfg[key]=!cfg[key];setToggle(rowId,cfg[key]);}
+function toggleCfgAvail(){cfg.availableOnly=!cfg.availableOnly;setToggle('tog-avail',cfg.availableOnly);updateFilterRulesVis();}
+function updateFilterRulesVis(){const fr=document.getElementById('filter-rules');if(fr)fr.style.opacity=cfg.availableOnly?'1':'0.3';}
 function goStep(n,dir){
-  const panels=document.querySelectorAll('.cfg-panel');
-  panels.forEach(p=>p.classList.remove('active','back'));
+  document.querySelectorAll('.cfg-panel').forEach(p=>p.classList.remove('active','back'));
   const next=document.getElementById('cfg-panel-'+n);
-  if(dir==='back')next.classList.add('cfg-panel','back');
+  if(dir==='back')next.classList.add('back');
   next.classList.add('active');
   cfgStep=n;
   updateStepDots(n);
@@ -1014,8 +920,7 @@ function goStep(n,dir){
 }
 function updateStepDots(current){
   for(let i=1;i<=4;i++){
-    const dot=document.getElementById('sdot-'+i);
-    const num=document.getElementById('sdot-n'+i);
+    const dot=document.getElementById('sdot-'+i),num=document.getElementById('sdot-n'+i);
     dot.classList.remove('active','done');
     if(i<current){dot.classList.add('done');num.textContent='✓';}
     else if(i===current){dot.classList.add('active');num.textContent=i;}
@@ -1028,18 +933,12 @@ function renderCfgStep(n){
   updateStepDots(n);
 }
 function buildReview(){
-  const yn=(v,onLabel='Yes',offLabel='No')=>v
-    ?`<span class="review-val on">✓ ${onLabel}</span>`
-    :`<span class="review-val off">— ${offLabel}</span>`;
-  document.getElementById('rv-persona').outerHTML=yn(cfg.personaMatch,'Enabled','Disabled');
-  document.getElementById('rv-phone').outerHTML=yn(cfg.enrichPhone,'Enabled','Disabled');
-  document.getElementById('rv-avail').outerHTML=yn(cfg.availableOnly,'Active','Inactive');
-  // Re-query after outerHTML replacement
-  document.querySelector('#cfg-panel-4 .review-section').innerHTML=`
-    <div class="review-section-title">Configuration</div>
-    <div class="review-row"><span class="review-label">Persona Match</span>${yn(cfg.personaMatch,'Enabled','Disabled')}</div>
-    <div class="review-row"><span class="review-label">Enrich phone number</span>${yn(cfg.enrichPhone,'Enabled','Disabled')}</div>
-    <div class="review-row"><span class="review-label">Available contacts only</span>${yn(cfg.availableOnly,'Active','Inactive')}</div>`;
+  const yn=(v,on='Enabled',off='Disabled')=>v
+    ?`<span class="review-val on">✓ ${on}</span>`
+    :`<span class="review-val off">— ${off}</span>`;
+  document.getElementById('rv-persona').outerHTML=`<span class="review-val" id="rv-persona">${yn(cfg.personaMatch)}</span>`;
+  document.getElementById('rv-phone').outerHTML=`<span class="review-val" id="rv-phone">${yn(cfg.enrichPhone)}</span>`;
+  document.getElementById('rv-avail').outerHTML=`<span class="review-val" id="rv-avail">${yn(cfg.availableOnly,'Active','Inactive')}</span>`;
   document.getElementById('rv-filters-block').style.display=cfg.availableOnly?'block':'none';
 }
 function confirmCfg(){
@@ -1047,9 +946,16 @@ function confirmCfg(){
   runImport();
 }
 
-// SEND
+// ── GENERATE UNIQUE IMPORT CODE ────────────────────────
+function genImportCode(){
+  return 'IMP-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
+}
+
+// ── SEND ───────────────────────────────────────────────
 function runImport(){
   const snapshot=[...leads],name=importName,by=importedBy,c={...cfg};
+  // ✅ Generate the code once here, attach to c so it's shared by all leads
+  c.code=genImportCode();
   const jobId=Date.now()+'_'+Math.random().toString(36).slice(2,7);
   document.getElementById('view-import').classList.remove('active');
   document.getElementById('view-home').classList.add('active');
@@ -1063,13 +969,20 @@ async function runSend(snapshot,name,by,c,jobId){
   for(const lead of snapshot){
     const owner=USERS.find(u=>u.name===lead.user);
     const payload={
-      importName:name,importedBy:by,importCode:c.code,
-      firstName:lead.firstName,lastName:lead.lastName,
-      linkedinUrl:lead.linkedinUrl,companyLinkedinUrl:lead.companyUrl,
+      importName:name,
+      importedBy:by,
+      importCode:c.code,   // ✅ now always defined and identical for every lead of this import
+      firstName:lead.firstName,
+      lastName:lead.lastName,
+      linkedinUrl:lead.linkedinUrl,
+      companyLinkedinUrl:lead.companyUrl,
       jobTitle:lead.jobTitle||'',
-      ownerName:lead.user,ownerId:owner?owner.id:null,
-      enrichEmail:true,enrichPhone:c.enrichPhone,
-      personaMatch:c.personaMatch,linkToCompany:true,
+      ownerName:lead.user,
+      ownerId:owner?owner.id:null,
+      enrichEmail:true,
+      enrichPhone:c.enrichPhone,
+      personaMatch:c.personaMatch,
+      linkToCompany:true,
       availableOnly:c.availableOnly,
       filter_notClientCompany:c.availableOnly,
       filter_notPartnership:c.availableOnly,
@@ -1098,10 +1011,8 @@ async function runSend(snapshot,name,by,c,jobId){
   toast(err===0?`✅ "${name}" — ${ok} lead${ok!==1?'s':''} sent!`:`"${name}" — ${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
 }
 
-// FILTER STATE
-let fUser='',fDate='';
-
-// Filter user dropdown
+// ── FILTER HISTORY ─────────────────────────────────────
+let fUser='';
 function buildFUserList(f=''){
   const allUsers=[...new Set(hist.map(b=>b.importedBy).filter(Boolean))].sort();
   const items=allUsers.filter(u=>!f||u.toLowerCase().includes(f.toLowerCase()));
@@ -1118,15 +1029,13 @@ function toggleFUserSel(){
 function filterFUserList(v){buildFUserList(v);}
 function pickFUser(u){
   fUser=u;
-  const el=document.getElementById('f-user-val');
-  el.textContent=u?u:'👤 Filter by user…';
-  el.classList.toggle('sel-ph',!u);
+  const el=document.getElementById('f-user-val');el.textContent=u?u:'👤 Filter by user…';el.classList.toggle('sel-ph',!u);
   document.getElementById('f-user-trig').classList.remove('open');
   document.getElementById('f-user-dd').style.display='none';
   filterHist();
 }
 function clearFilters(){
-  fUser='';fDate='';
+  fUser='';calSelected='';
   document.getElementById('f-search').value='';
   clearCalDate();
   const el=document.getElementById('f-user-val');el.textContent='👤 Filter by user…';el.classList.add('sel-ph');
@@ -1135,16 +1044,13 @@ function clearFilters(){
 }
 function filterHist(){
   const search=document.getElementById('f-search').value.trim().toLowerCase();
-  fDate=document.getElementById('f-date').value;
   const filtered=hist.filter(b=>{
     if(search&&!b.name.toLowerCase().includes(search))return false;
     if(fUser&&b.importedBy!==fUser)return false;
-    if(fDate){
-      // b.date is like "28/03/2026, 17:05:00" — parse day/month/year
+    if(calSelected){
       const parts=b.date.split(/[\/,\s:]+/);
-      const bDay=parts[0],bMonth=parts[1],bYear=parts[2];
-      const bDateStr=`${bYear}-${bMonth.padStart(2,'0')}-${bDay.padStart(2,'0')}`;
-      if(bDateStr!==fDate)return false;
+      const bDateStr=`${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;
+      if(bDateStr!==calSelected)return false;
     }
     return true;
   });
@@ -1183,6 +1089,8 @@ function renderHistList(items){
       </div>
     </div>`).join('');
 }
+
+// ── TABLE SELECT (owner per row) ───────────────────────
 let openTsel=null;
 function closeTsel(){
   if(openTsel){document.getElementById('tdd-'+openTsel)?.remove();document.getElementById('ttr-'+openTsel)?.classList.remove('open');openTsel=null;}
@@ -1208,7 +1116,7 @@ function buildTselList(id,f,cur){
 function filterTsel(id,v){const l=leads.find(l=>l.id===id);buildTselList(id,v,l?l.user:'');}
 function pickTsel(id,u){const l=leads.find(l=>l.id===id);if(!l)return;l._t=true;l.user=u;closeTsel();render();footer();btn();}
 
-// LEADS
+// ── LEADS TABLE ────────────────────────────────────────
 function addRow(d={}){leads.push({id:++idc,firstName:'',lastName:'',linkedinUrl:'',companyUrl:'',jobTitle:'',user:'',status:'idle',...d});render();}
 function removeRow(id){leads=leads.filter(l=>l.id!==id);render();}
 function clearAll(){if(!leads.length||!confirm('Clear all leads?'))return;leads=[];render();}
@@ -1245,17 +1153,17 @@ function btn(){
   const b=document.getElementById('send-btn');
   const ready=leads.length>0&&leads.every(isValid);
   b.disabled=!ready;
-  b.title=ready?'':'Import setup is not complete yet. Please fill all required fields before continuing.';
+  b.title=ready?'':'Fill all required fields before continuing.';
 }
 
-// NAVIGATION
+// ── NAVIGATION ─────────────────────────────────────────
 function goHome(){
   document.getElementById('view-import').classList.remove('active');
   document.getElementById('view-home').classList.add('active');
   leads=[];idc=0;renderHome();
 }
 
-// HOME
+// ── HOME ───────────────────────────────────────────────
 function renderHome(){
   document.getElementById('s-imp').textContent=hist.length;
   document.getElementById('s-leads').textContent=hist.reduce((a,b)=>a+b.total,0);
@@ -1282,6 +1190,7 @@ function toast(msg,type='info'){
   const el=document.createElement('div');el.className='toast '+type;el.textContent=msg;
   w.appendChild(el);setTimeout(()=>el.remove(),5000);
 }
+
 renderHome();
 </script>
 </body>
