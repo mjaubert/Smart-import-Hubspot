@@ -474,8 +474,8 @@ const USERS=["Gwenn JAMBOU","Nolwenn André","Victoria Hanne","Maxence Jaubert",
 
 let leads=[],idc=0,importName='',importedBy='',hist=[];
 let csvRawHeaders=[],csvRawRows=[],ownerPickVal='';
-// activeJob: tracks the running send job so home can poll it
-let activeJob=null;
+// activeJobs: array of {id, name, by} — multiple can run in parallel
+let activeJobs=[];
 try{hist=JSON.parse(localStorage.getItem('hs_v7')||'[]');}catch{}
 
 // ── PARALLAX ──
@@ -518,10 +518,8 @@ document.addEventListener('click',e=>{
   }
 });
 
-// ── NEW IMPORT MODAL ──
+// ── NEW IMPORT MODAL ── (never blocked — even during active jobs)
 function openNewModal(){
-  // Block new import if one is running
-  if(activeJob){toast('An import is already in progress. Please wait for it to complete.','info');return;}
   mSelVal='';
   document.getElementById('m-name').value='';
   document.getElementById('m-name').classList.remove('err');
@@ -717,23 +715,21 @@ function closeConfirm(){document.getElementById('modal-confirm').classList.remov
 // ── CONFIRM SEND — point of no return ──
 function confirmSend(){
   closeConfirm();
-  // 1. Snapshot the leads to send
   const snapshot=[...leads];
   const name=importName,by=importedBy;
-  // 2. Immediately go to home — user never sees the import view again
+  const jobId=Date.now()+'_'+Math.random().toString(36).slice(2,7);
+  // 1. Go home immediately — import view is gone, this import is now locked
   document.getElementById('view-import').classList.remove('active');
   document.getElementById('view-home').classList.add('active');
   leads=[];idc=0;
-  // 3. Show in-progress banner
-  activeJob={name,by};
-  document.getElementById('inprogress-name').textContent=name;
-  document.getElementById('inprogress-banner').classList.add('show');
+  // 2. Register job & refresh home (banner appears)
+  activeJobs.push({id:jobId,name,by});
   renderHome();
-  // 4. Run the send in the background
-  runSend(snapshot,name,by);
+  // 3. Run send in background — does NOT block new imports
+  runSend(snapshot,name,by,jobId);
 }
 
-async function runSend(snapshot,name,by){
+async function runSend(snapshot,name,by,jobId){
   const results=[];
   for(const lead of snapshot){
     const payload={importName:name,importedBy:by,linkedinUrl:lead.linkedinUrl,companyLinkedinUrl:lead.companyUrl,user:lead.user};
@@ -745,14 +741,12 @@ async function runSend(snapshot,name,by){
   }
   const ok=results.filter(r=>r.status==='sent').length;
   const err=results.filter(r=>r.status==='error').length;
-  // Save to history
   hist.unshift({id:Date.now(),name,importedBy:by,date:new Date().toLocaleString('en-GB'),total:results.length,ok,err,leads:results});
   try{localStorage.setItem('hs_v7',JSON.stringify(hist));}catch{}
-  // Clear in-progress state
-  activeJob=null;
-  document.getElementById('inprogress-banner').classList.remove('show');
+  // Remove job from active list
+  activeJobs=activeJobs.filter(j=>j.id!==jobId);
   renderHome();
-  toast(err===0?`✅ ${ok} lead${ok!==1?'s':''} sent — import complete!`:`${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
+  toast(err===0?`✅ "${name}" — ${ok} lead${ok!==1?'s':''} sent!`:`"${name}" — ${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
 }
 
 // ── NAVIGATION ──
@@ -769,6 +763,20 @@ function renderHome(){
   document.getElementById('s-err').textContent=hist.reduce((a,b)=>a+b.err,0);
   document.getElementById('hist-badge').textContent=hist.length;
   document.getElementById('hist-empty').style.display=hist.length?'none':'block';
+
+  // Render all active job banners
+  const banner=document.getElementById('inprogress-banner');
+  if(activeJobs.length>0){
+    banner.classList.add('show');
+    document.getElementById('inprogress-name').innerHTML=activeJobs.map(j=>`
+      <div style="margin-bottom:${activeJobs.length>1?'10px':'0'};padding-bottom:${activeJobs.length>1?'10px':'0'};border-bottom:${activeJobs.length>1?'1px solid rgba(99,102,241,.15)':'none'}">
+        <div style="font-size:15px;font-weight:700;color:var(--t)">${esc(j.name)}</div>
+        <div style="font-size:12px;color:var(--t3);margin-top:2px">By ${esc(j.by)}</div>
+      </div>`).join('');
+  } else {
+    banner.classList.remove('show');
+  }
+
   document.getElementById('hist-list').innerHTML=hist.map(b=>`
     <div class="bcard" id="bc${b.id}">
       <div class="bcard-hd" onclick="toggleB(${b.id})">
