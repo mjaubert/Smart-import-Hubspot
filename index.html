@@ -43,7 +43,6 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .btn-danger:hover{background:rgba(248,113,113,.15)}
 .btn-sm{padding:6px 13px;font-size:12px;border-radius:9px}
 .btn-lg{padding:13px 28px;font-size:15px;border-radius:14px}
-.btn-icon{width:32px;height:32px;padding:0;border-radius:8px;font-size:14px}
 
 /* VIEWS */
 .view{display:none;flex:1;flex-direction:column}
@@ -67,7 +66,7 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .inprogress-list{margin-bottom:28px;display:flex;flex-direction:column;gap:10px}
 .ip-card{background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(139,92,246,.08));border:1px solid rgba(99,102,241,.25);border-radius:var(--rl);padding:18px 22px;display:flex;align-items:flex-start;gap:16px;animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.ip-spinner{width:34px;height:34px;flex-shrink:0;position:relative;margin-top:2px}
+.ip-spinner{width:34px;height:34px;flex-shrink:0;margin-top:2px}
 .ip-spinner svg{width:34px;height:34px;animation:spin 1.4s linear infinite}
 .ip-spinner circle{fill:none;stroke:rgba(99,102,241,.2);stroke-width:3}
 .ip-spinner .arc{stroke:#818cf8;stroke-dasharray:60 100;stroke-linecap:round}
@@ -86,7 +85,6 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .hist-scroll::-webkit-scrollbar{width:4px}
 .hist-scroll::-webkit-scrollbar-track{background:transparent}
 .hist-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:999px}
-.hist-scroll::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.2)}
 .hist-empty{text-align:center;padding:56px 24px;border:1px dashed rgba(255,255,255,.07);border-radius:var(--rl);background:rgba(255,255,255,.015)}
 .hist-empty .ei{font-size:40px;margin-bottom:12px;opacity:.5}
 .hist-empty p{font-size:14px;color:var(--t3)}
@@ -94,7 +92,7 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .bcard:last-child{margin-bottom:0}
 .bcard:hover{background:rgba(255,255,255,.055);border-color:rgba(255,122,89,.2);box-shadow:0 6px 24px rgba(0,0,0,.28)}
 .bcard-hd{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none}
-.bcard-ico{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--a),var(--a2));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 12px rgba(255,122,89,.22)}
+.bcard-ico{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--a),var(--a2));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .bcard-meta{flex:1;min-width:0}
 .bcard-name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bcard-sub{font-size:12px;color:var(--t3);margin-top:3px}
@@ -110,12 +108,12 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .bcard.open .bcard-bd{display:block}
 .btbl{width:100%;border-collapse:collapse;font-size:12px}
 .btbl th{padding:8px 20px;text-align:left;color:var(--t3);font-weight:700;text-transform:uppercase;font-size:10px;letter-spacing:.06em;border-bottom:1px solid var(--b)}
-.btbl td{padding:8px 20px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btbl td{padding:8px 20px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--t2);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .btbl tr:last-child td{border-bottom:none}
 .s-ok{color:#34d399!important;font-weight:600}
 .s-err{color:var(--err)!important;font-weight:600}
 
-/* OVERLAYS */
+/* ═══ OVERLAYS ═══ */
 .overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.78);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:20px}
 .overlay.open{display:flex}
 .modal{background:linear-gradient(160deg,#13131f,#0f0f18);border:1px solid rgba(255,255,255,.1);border-radius:var(--rxl);padding:40px;width:100%;max-width:480px;box-shadow:0 40px 80px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.04) inset;animation:mIn .28s cubic-bezier(.34,1.46,.64,1)}
@@ -165,7 +163,37 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .confirm-details div{margin-bottom:5px}
 .confirm-details div:last-child{margin-bottom:0}
 
-/* IMPORT VIEW */
+/* ═══ IMPORT CONFIG MODAL ═══ */
+.config-modal{max-width:520px}
+.config-section{margin-bottom:20px}
+.config-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.config-section-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
+
+/* Option row */
+.opt-row{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:var(--r);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);margin-bottom:8px;transition:all .15s;cursor:pointer;user-select:none}
+.opt-row:last-child{margin-bottom:0}
+.opt-row:hover:not(.opt-locked){background:rgba(255,255,255,.05);border-color:rgba(255,122,89,.2)}
+.opt-row.opt-checked{background:rgba(255,122,89,.06);border-color:rgba(255,122,89,.2)}
+.opt-row.opt-locked{cursor:default;opacity:.9}
+.opt-row.opt-locked.opt-checked{background:rgba(16,185,129,.05);border-color:rgba(16,185,129,.2)}
+
+/* Checkbox */
+.opt-check{width:18px;height:18px;border-radius:5px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:11px}
+.opt-row.opt-checked .opt-check{background:var(--a);border-color:var(--a);color:#fff;box-shadow:0 2px 8px rgba(255,122,89,.3)}
+.opt-row.opt-locked.opt-checked .opt-check{background:var(--ok);border-color:var(--ok);color:#fff;box-shadow:0 2px 8px rgba(16,185,129,.3)}
+
+.opt-body{flex:1;min-width:0}
+.opt-title{font-size:13px;font-weight:600;color:var(--t);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.opt-locked-badge{font-size:10px;font-weight:700;color:var(--ok);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:999px;padding:1px 7px;letter-spacing:.03em;text-transform:uppercase}
+.opt-desc{font-size:12px;color:var(--t3);margin-top:3px;line-height:1.5}
+
+/* Sub-rules */
+.sub-rules{margin-top:10px;padding:10px 14px;background:rgba(255,255,255,.025);border-radius:9px;border:1px solid rgba(255,255,255,.05)}
+.sub-rules-title{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.sub-rule{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t2);padding:3px 0}
+.sub-rule::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(16,185,129,.5);flex-shrink:0}
+
+/* ═══ IMPORT VIEW ═══ */
 .imp-bar{display:flex;align-items:center;gap:12px;padding:14px 32px;border-bottom:1px solid var(--b);backdrop-filter:blur(20px);background:rgba(8,8,14,.8);flex-wrap:wrap}
 .back{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:16px;transition:all .18s;flex-shrink:0}
 .back:hover{background:rgba(255,255,255,.12);color:var(--t);border-color:rgba(255,122,89,.3)}
@@ -186,7 +214,7 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .pf{height:100%;background:linear-gradient(90deg,var(--a),var(--a3));width:0%;transition:width .3s}
 
 .table-wrap{overflow-x:auto;padding:20px 32px 16px;flex:1}
-table{width:100%;border-collapse:collapse;min-width:560px}
+table{width:100%;border-collapse:collapse;min-width:700px}
 thead tr{background:rgba(255,255,255,.025)}
 th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);border-bottom:1px solid var(--b)}
 th.req::after{content:' *';color:var(--err)}
@@ -239,7 +267,9 @@ td.ac{width:38px;text-align:center}
 .map-csv-sel option{background:#13131f}
 .map-arrow{text-align:center;color:var(--t3);font-size:16px}
 .map-target{background:rgba(255,122,89,.07);border:1px solid rgba(255,122,89,.18);border-radius:9px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.map-target.optional{background:rgba(99,102,241,.07);border-color:rgba(99,102,241,.2);color:#a5b4fc}
 .map-target .star{color:var(--err);margin-left:3px;font-size:11px}
+.map-target .opt-tag{color:rgba(165,180,252,.6);font-size:11px;font-weight:500;margin-left:4px}
 .map-divider{height:1px;background:rgba(255,255,255,.06);margin:20px 0}
 
 /* OWNER BLOCK */
@@ -338,7 +368,7 @@ td.ac{width:38px;text-align:center}
         </label>
         <button class="btn btn-ghost btn-sm" onclick="addRow()">＋ Add row</button>
         <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑</button>
-        <button class="btn btn-primary btn-sm" id="send-btn" onclick="askConfirm()" disabled>🚀 Send to HubSpot</button>
+        <button class="btn btn-primary btn-sm" id="send-btn" onclick="openConfigModal()" disabled>🚀 Send to HubSpot</button>
       </div>
     </div>
     <div class="pb"><div class="pf" id="progress"></div></div>
@@ -346,8 +376,11 @@ td.ac{width:38px;text-align:center}
       <table>
         <thead><tr>
           <th style="width:36px">#</th>
+          <th class="req">First Name</th>
+          <th class="req">Last Name</th>
           <th class="req">LinkedIn Profile URL</th>
           <th class="req">LinkedIn Company URL</th>
+          <th>Job Title</th>
           <th class="req">HubSpot Owner</th>
           <th style="width:36px"></th>
           <th style="width:38px"></th>
@@ -358,7 +391,7 @@ td.ac{width:38px;text-align:center}
     </div>
     <div class="footer-bar">
       <span id="footer-info">0 leads · 0 valid · 0 incomplete</span>
-      <span>LinkedIn Profile URL · LinkedIn Company URL · HubSpot Owner required</span>
+      <span>First Name, Last Name, LinkedIn URLs & HubSpot Owner required · Job Title optional</span>
     </div>
   </div>
 </div>
@@ -401,6 +434,16 @@ td.ac{width:38px;text-align:center}
     <p class="modal-desc">Detected <strong id="map-col-count">0</strong> columns · <strong id="map-row-count">0</strong> rows. Match each CSV column to its HubSpot destination.</p>
     <div class="map-grid">
       <div class="map-row">
+        <select class="map-csv-sel" id="map-firstname"></select>
+        <div class="map-arrow">→</div>
+        <div class="map-target">First Name<span class="star">*</span></div>
+      </div>
+      <div class="map-row">
+        <select class="map-csv-sel" id="map-lastname"></select>
+        <div class="map-arrow">→</div>
+        <div class="map-target">Last Name<span class="star">*</span></div>
+      </div>
+      <div class="map-row">
         <select class="map-csv-sel" id="map-linkedin"></select>
         <div class="map-arrow">→</div>
         <div class="map-target">LinkedIn Profile URL<span class="star">*</span></div>
@@ -409,6 +452,11 @@ td.ac{width:38px;text-align:center}
         <select class="map-csv-sel" id="map-company"></select>
         <div class="map-arrow">→</div>
         <div class="map-target">LinkedIn Company URL<span class="star">*</span></div>
+      </div>
+      <div class="map-row">
+        <select class="map-csv-sel" id="map-jobtitle"></select>
+        <div class="map-arrow">→</div>
+        <div class="map-target optional">Job Title<span class="opt-tag">(optional)</span></div>
       </div>
     </div>
     <div class="map-divider"></div>
@@ -440,6 +488,82 @@ td.ac{width:38px;text-align:center}
   </div>
 </div>
 
+<!-- IMPORT CONFIG MODAL -->
+<div class="overlay" id="modal-config" onclick="if(event.target===this)closeConfig()">
+  <div class="modal config-modal">
+    <div class="modal-badge">⚙️ Import Configuration</div>
+    <h3>Configure your import</h3>
+    <p class="modal-desc">Select how this import should be processed. Locked options are always applied.</p>
+
+    <!-- ENRICHMENT -->
+    <div class="config-section">
+      <div class="config-section-label">Enrichment</div>
+
+      <div class="opt-row opt-locked opt-checked" title="Always applied — cannot be disabled">
+        <div class="opt-check">✓</div>
+        <div class="opt-body">
+          <div class="opt-title">Enrich email address <span class="opt-locked-badge">Always on</span></div>
+          <div class="opt-desc">Automatically find and attach a professional email for each contact.</div>
+        </div>
+      </div>
+
+      <div class="opt-row opt-checked" id="opt-phone" onclick="toggleOpt('opt-phone','enrichPhone')">
+        <div class="opt-check" id="chk-phone"></div>
+        <div class="opt-body">
+          <div class="opt-title">Enrich phone number</div>
+          <div class="opt-desc">Attempt to find a phone number for each contact.</div>
+        </div>
+      </div>
+
+      <div class="opt-row opt-checked" id="opt-persona" onclick="toggleOpt('opt-persona','personaMatch')">
+        <div class="opt-check" id="chk-persona"></div>
+        <div class="opt-body">
+          <div class="opt-title">Persona Match <span style="font-size:12px;color:var(--t3);font-weight:400">(checks whether the contact fits our ICP)</span></div>
+          <div class="opt-desc">Verify whether each contact matches your Ideal Customer Profile before import.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRM LINKING -->
+    <div class="config-section">
+      <div class="config-section-label">CRM</div>
+
+      <div class="opt-row opt-locked opt-checked" title="Always applied — cannot be disabled">
+        <div class="opt-check">✓</div>
+        <div class="opt-body">
+          <div class="opt-title">Link contact to company in CRM <span class="opt-locked-badge">Always on</span></div>
+          <div class="opt-desc">Automatically associate each contact with their company record in HubSpot.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTERING -->
+    <div class="config-section">
+      <div class="config-section-label">Filtering</div>
+
+      <div class="opt-row opt-checked" id="opt-avail" onclick="toggleOpt('opt-avail','availableOnly')">
+        <div class="opt-check" id="chk-avail"></div>
+        <div class="opt-body">
+          <div class="opt-title">Import only available contacts for prospection</div>
+          <div class="opt-desc">Only import contacts that are currently open for outreach.</div>
+          <div class="sub-rules" id="sub-rules-avail">
+            <div class="sub-rules-title">Included filters</div>
+            <div class="sub-rule">Not associated to client companies</div>
+            <div class="sub-rule">Not a partnership contact</div>
+            <div class="sub-rule">Not associated to companies with open deals</div>
+            <div class="sub-rule">Not already worked by another BDR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeConfig()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmConfig()">Confirm & review →</button>
+    </div>
+  </div>
+</div>
+
 <!-- CONFIRM SEND MODAL -->
 <div class="overlay" id="modal-confirm" onclick="if(event.target===this)closeConfirm()">
   <div class="modal" style="max-width:420px">
@@ -459,95 +583,66 @@ td.ac{width:38px;text-align:center}
 <script>
 const WEBHOOK='https://api.clay.com/v3/sources/webhook/pull-in-data-from-a-webhook-be430a93-c9a6-4222-832b-fff68466e1ee';
 const BYPASS='HQ5JV0qhkuqeoAAcOy1vaNIWgxac1dRn';
-// USERS — real HubSpot owners with their owner IDs
+
+// Real HubSpot owners with IDs — active only, sorted alphabetically
 const USERS=[
-  {name:"Alexandre Collignon",id:34343353},
-  {name:"Colm O'Brien",id:36316163},
-  {name:"ROMAIN TIRUEL",id:36316202},
-  {name:"Becca Guinchard",id:36316203},
-  {name:"Mélina LE MIGNON",id:36316204},
-  {name:"Quentin CERVELLE",id:36316287},
-  {name:"François Lehec",id:36316288},
-  {name:"Team IT",id:36644443},
-  {name:"Noémie GRILLOT",id:36650112},
-  {name:"Paul Stout",id:36915773},
-  {name:"David BERNARD",id:37041594},
-  {name:"Emmanuelle Sillé",id:37041599},
-  {name:"FANNY POURCINE",id:38211487},
-  {name:"Duncan Perret",id:40464255},
-  {name:"Arthur BEQUIN",id:53020438},
-  {name:"Emmanuelle Cortes",id:53782329},
-  {name:"Valentin Beaudon",id:75626642},
-  {name:"Kevin Rignault",id:75626648},
-  {name:"Aisha Roukhamieh-Mckinna",id:76163167},
-  {name:"Jacopo Carretta",id:76250532},
-  {name:"Pauline NUGUES",id:76580152},
-  {name:"Marine Degruson",id:78565326},
-  {name:"Antoine GOEHRS",id:78593784},
-  {name:"Marie Tiberghien",id:79019592},
-  {name:"Justine Gager",id:79390234},
-  {name:"Aurore Lefebvre",id:80948621},
-  {name:"Nolwenn André",id:81625372},
-  {name:"Emeric Kubiak",id:82026369},
-  {name:"Simon Baron",id:82026370},
-  {name:"Jeanne DARBIN",id:82438786},
-  {name:"Fanny Maynadie",id:82718476},
-  {name:"Sacha Ghanem",id:82718477},
-  {name:"Maxence Jaubert",id:82921029},
-  {name:"Sara Poretta",id:83038614},
-  {name:"Laura Weerawardana",id:83474287},
-  {name:"Mélanie Chauvin",id:83906255},
-  {name:"Evana Le Puil",id:84050896},
-  {name:"Margot Pourailly",id:84286070},
-  {name:"Svetlana Pashina",id:85109623},
-  {name:"Charly Arnaud",id:85610572},
-  {name:"Siril Maurice",id:85760726},
-  {name:"Aurélie Pureur",id:86013889},
-  {name:"Marie Tavenier",id:86545285},
-  {name:"Vianney Mathorel",id:88036747},
-  {name:"Alessandro De Valerio",id:88036749},
-  {name:"Julien Hirtzig",id:89921321},
-  {name:"Christophe HOAREAU",id:90604097},
-  {name:"Victoria Hanne",id:102901848},
-  {name:"Charlie VEREAU",id:112473414},
-  {name:"Gwenn JAMBOU",id:117331758},
-  {name:"JB Comte",id:119539483},
-  {name:"Elodie PINHEIRA",id:149054287},
-  {name:"Florian Donet",id:163990085},
-  {name:"Camille Brun",id:164452752},
-  {name:"Karla Rousselet",id:192539493},
-  {name:"Maxime BOUCHER",id:216117057},
-  {name:"Sofia Taleb Benjelloun",id:227469952},
-  {name:"Wendy BECHET",id:229891396},
-  {name:"Lolita Soligny",id:230065069},
-  {name:"Christopher ROUSSEL",id:259862553},
-  {name:"Luciano Cipolla",id:259976305},
-  {name:"Noémie de Montmarin",id:300228353},
-  {name:"Arthur DAVIES",id:333866906},
-  {name:"Dylan Pujol",id:345878022},
-  {name:"Rebecca COTTIGNIES",id:356760194},
-  {name:"Lauren Tait",id:372192068},
-  {name:"Tales MARRA",id:394994054},
-  {name:"Imane Omri",id:460737129},
-  {name:"Yohan LE CLECH",id:466116392},
-  {name:"Jules Jatteau",id:495975757},
-  {name:"Clara Facchetti",id:542455075},
-  {name:"Chakir SMIRES",id:644464934},
-  {name:"Eléonore Guillemot",id:730814087},
-  {name:"Clément ATTOU",id:1408647088},
-  {name:"Capucine LEVY",id:1494819715},
-  {name:"Laura POUDEVIGNE",id:1645262747},
-  {name:"Valentin Burr",id:1665294764},
-  {name:"Emeline Wulstecke",id:1108291986},
-  {name:"Julie BABEAU",id:618242584},
-  {name:"Max HANCE",id:621152876},
-  {name:"Mathieu Parisot",id:37527282},
-].sort((a,b)=>a.name.localeCompare(b.name));
+  {name:"Aisha Roukhamieh-Mckinna",id:76163167},{name:"Alessandro De Valerio",id:88036749},
+  {name:"Alexandre Collignon",id:34343353},{name:"Antoine GOEHRS",id:78593784},
+  {name:"Arthur BEQUIN",id:53020438},{name:"Arthur DAVIES",id:333866906},
+  {name:"Aurore Lefebvre",id:80948621},{name:"Aurélie Pureur",id:86013889},
+  {name:"Becca Guinchard",id:36316203},{name:"Camille Brun",id:164452752},
+  {name:"Capucine LEVY",id:1494819715},{name:"Chakir SMIRES",id:644464934},
+  {name:"Charly Arnaud",id:85610572},{name:"Charlie VEREAU",id:112473414},
+  {name:"Christopher ROUSSEL",id:259862553},{name:"Clara Facchetti",id:542455075},
+  {name:"Clément ATTOU",id:1408647088},{name:"Colm O'Brien",id:36316163},
+  {name:"David BERNARD",id:37041594},{name:"Duncan Perret",id:40464255},
+  {name:"Dylan Pujol",id:345878022},{name:"Eléonore Guillemot",id:730814087},
+  {name:"Elodie PINHEIRA",id:149054287},{name:"Emeric Kubiak",id:82026369},
+  {name:"Emeline Wulstecke",id:1108291986},{name:"Emmanuelle Cortes",id:53782329},
+  {name:"Emmanuelle Sillé",id:37041599},{name:"Evana Le Puil",id:84050896},
+  {name:"FANNY POURCINE",id:38211487},{name:"Fanny Maynadie",id:82718476},
+  {name:"Florian Donet",id:163990085},{name:"François Lehec",id:36316288},
+  {name:"Gwenn JAMBOU",id:117331758},{name:"Imane Omri",id:460737129},
+  {name:"JB Comte",id:119539483},{name:"Jacopo Carretta",id:76250532},
+  {name:"Jeanne DARBIN",id:82438786},{name:"Julie BABEAU",id:618242584},
+  {name:"Jules Jatteau",id:495975757},{name:"Julien Hirtzig",id:89921321},
+  {name:"Justine Gager",id:79390234},{name:"Karla Rousselet",id:192539493},
+  {name:"Kevin Rignault",id:75626648},{name:"Laura POUDEVIGNE",id:1645262747},
+  {name:"Laura Weerawardana",id:83474287},{name:"Lauren Tait",id:372192068},
+  {name:"Lolita Soligny",id:230065069},{name:"Luciano Cipolla",id:259976305},
+  {name:"Marie Tavenier",id:86545285},{name:"Marie Tiberghien",id:79019592},
+  {name:"Marine Degruson",id:78565326},{name:"Margot Pourailly",id:84286070},
+  {name:"Mathieu Parisot",id:37527282},{name:"Max HANCE",id:621152876},
+  {name:"Maxence Jaubert",id:82921029},{name:"Maxime BOUCHER",id:216117057},
+  {name:"Mélanie Chauvin",id:83906255},{name:"Mélina LE MIGNON",id:36316204},
+  {name:"Noémie GRILLOT",id:36650112},{name:"Noémie de Montmarin",id:300228353},
+  {name:"Nolwenn André",id:81625372},{name:"Paul Stout",id:36915773},
+  {name:"Pauline NUGUES",id:76580152},{name:"Quentin CERVELLE",id:36316287},
+  {name:"ROMAIN TIRUEL",id:36316202},{name:"Rebecca COTTIGNIES",id:356760194},
+  {name:"Sacha Ghanem",id:82718477},{name:"Sara Poretta",id:83038614},
+  {name:"Simon Baron",id:82026370},{name:"Siril Maurice",id:85760726},
+  {name:"Sofia Taleb Benjelloun",id:227469952},{name:"Svetlana Pashina",id:85109623},
+  {name:"Tales MARRA",id:394994054},{name:"Team IT",id:36644443},
+  {name:"Valentin Beaudon",id:75626642},{name:"Valentin Burr",id:1665294764},
+  {name:"Vianney Mathorel",id:88036747},{name:"Victoria Hanne",id:102901848},
+  {name:"Wendy BECHET",id:229891396},{name:"Yohan LE CLECH",id:466116392},
+  {name:"Christophe HOAREAU",id:90604097},{name:"François Lehec",id:36316288},
+];
 
 let leads=[],idc=0,importName='',importedBy='',hist=[];
 let csvRawHeaders=[],csvRawRows=[],ownerPickVal='';
 let activeJobs=[];
-try{hist=JSON.parse(localStorage.getItem('hs_v8')||'[]');}catch{}
+
+// Import config state
+let importConfig={
+  enrichEmail:true,       // locked
+  enrichPhone:false,
+  personaMatch:true,
+  linkToCompany:true,     // locked
+  availableOnly:true,
+};
+
+try{hist=JSON.parse(localStorage.getItem('hs_v10')||'[]');}catch{}
 
 // PARALLAX
 document.addEventListener('mousemove',e=>{
@@ -570,7 +665,7 @@ document.addEventListener('click',e=>{
   if(!e.target.closest('.tsel-wrap'))closeTsel();
 });
 
-// MODAL SELECT
+// MODAL SELECT — Created by
 let mSelVal='';
 function buildMSelList(f=''){
   const items=USERS.filter(u=>!f||u.name.toLowerCase().includes(f.toLowerCase()));
@@ -591,7 +686,7 @@ function pickMSel(u){
   document.getElementById('modal-sel-dd').style.display='none';buildMSelList();
 }
 
-// NEW IMPORT MODAL — always available
+// NEW IMPORT MODAL
 function openNewModal(){
   mSelVal='';
   document.getElementById('m-name').value='';
@@ -674,25 +769,39 @@ function pickOwner(u){
   buildOwnerList();
 }
 
-// MAPPING MODAL
+// CSV MAPPING MODAL
 const MAP_ALIASES={
+  firstName:['firstname','prenom','prénom','first','givenname','first_name'],
+  lastName:['lastname','nom','last','surname','familyname','last_name'],
   linkedinUrl:['linkedinurl','linkedin','profileurl','liurl','linkedinprofile','personlinkedin','linkedin_url','profile_url'],
-  companyUrl:['companylinkedinurl','companylinkedin','companyurl','linkedincompany','company_linkedin','company_url']
+  companyUrl:['companylinkedinurl','companylinkedin','companyurl','linkedincompany','company_linkedin','company_url'],
+  jobTitle:['jobtitle','job_title','title','poste','fonction','position','role']
 };
 function autoMap(h){
   const n=s=>s.toLowerCase().replace(/[^a-z_]/g,'').replace(/\s+/g,'_');
-  return{linkedinUrl:h.findIndex(x=>MAP_ALIASES.linkedinUrl.includes(n(x))),
-         companyUrl:h.findIndex(x=>MAP_ALIASES.companyUrl.includes(n(x)))};
+  return{
+    firstName:h.findIndex(x=>MAP_ALIASES.firstName.includes(n(x))),
+    lastName:h.findIndex(x=>MAP_ALIASES.lastName.includes(n(x))),
+    linkedinUrl:h.findIndex(x=>MAP_ALIASES.linkedinUrl.includes(n(x))),
+    companyUrl:h.findIndex(x=>MAP_ALIASES.companyUrl.includes(n(x))),
+    jobTitle:h.findIndex(x=>MAP_ALIASES.jobTitle.includes(n(x)))
+  };
 }
 function openMapModal(){
   const h=csvRawHeaders,m=autoMap(h);
   document.getElementById('map-col-count').textContent=h.length;
   document.getElementById('map-row-count').textContent=csvRawRows.length;
   document.getElementById('map-count').textContent=csvRawRows.length;
-  const opts='<option value="-1">— Not mapped —</option>'+h.map((x,i)=>`<option value="${i}">${esc(x)}</option>`).join('');
-  ['map-linkedin','map-company'].forEach(id=>{const s=document.getElementById(id);s.innerHTML=opts;s.classList.remove('auto');});
-  if(m.linkedinUrl>=0){const s=document.getElementById('map-linkedin');s.value=m.linkedinUrl;s.classList.add('auto');}
-  if(m.companyUrl>=0){const s=document.getElementById('map-company');s.value=m.companyUrl;s.classList.add('auto');}
+  const reqOpts='<option value="-1">— Not mapped —</option>'+h.map((x,i)=>`<option value="${i}">${esc(x)}</option>`).join('');
+  const optOpts='<option value="-1">— Not mapped (optional) —</option>'+h.map((x,i)=>`<option value="${i}">${esc(x)}</option>`).join('');
+  ['map-firstname','map-lastname','map-linkedin','map-company'].forEach(id=>{const s=document.getElementById(id);s.innerHTML=reqOpts;s.classList.remove('auto');});
+  document.getElementById('map-jobtitle').innerHTML=optOpts;document.getElementById('map-jobtitle').classList.remove('auto');
+  const setMap=(id,idx)=>{if(idx>=0){const s=document.getElementById(id);s.value=idx;s.classList.add('auto');}};
+  setMap('map-firstname',m.firstName);
+  setMap('map-lastname',m.lastName);
+  setMap('map-linkedin',m.linkedinUrl);
+  setMap('map-company',m.companyUrl);
+  setMap('map-jobtitle',m.jobTitle);
   ownerPickVal='';
   document.getElementById('owner-av').textContent='👤';document.getElementById('owner-av').classList.add('empty');
   const vEl=document.getElementById('owner-pick-val');vEl.textContent='Select a HubSpot owner…';vEl.classList.add('owner-pick-ph');
@@ -704,17 +813,118 @@ function openMapModal(){
 }
 function closeMap(){document.getElementById('modal-map').classList.remove('open');resetCsvZone();}
 function confirmMap(){
+  const fn=parseInt(document.getElementById('map-firstname').value);
+  const ln=parseInt(document.getElementById('map-lastname').value);
   const li=parseInt(document.getElementById('map-linkedin').value);
   const co=parseInt(document.getElementById('map-company').value);
-  if(li<0||co<0){toast('Please map both LinkedIn columns.','error');return;}
+  const jt=parseInt(document.getElementById('map-jobtitle').value);
+  if(fn<0||ln<0||li<0||co<0){toast('Please map First Name, Last Name and both LinkedIn columns.','error');return;}
   if(!ownerPickVal){document.getElementById('owner-err').classList.add('show');return;}
   let n=0;
   csvRawRows.forEach(cols=>{
-    const l=(cols[li]||'').trim(),c=(cols[co]||'').trim();
-    if(l||c){leads.push({id:++idc,status:'idle',linkedinUrl:l,companyUrl:c,user:ownerPickVal});n++;}
+    const first=(cols[fn]||'').trim(),last=(cols[ln]||'').trim();
+    const linkedin=(cols[li]||'').trim(),company=(cols[co]||'').trim();
+    const job=jt>=0?(cols[jt]||'').trim():'';
+    if(first||last||linkedin||company){
+      leads.push({id:++idc,status:'idle',firstName:first,lastName:last,linkedinUrl:linkedin,companyUrl:company,jobTitle:job,user:ownerPickVal});n++;
+    }
   });
   document.getElementById('modal-map').classList.remove('open');resetCsvZone();
   render();toast(n+' lead'+(n!==1?'s':'')+' imported','success');
+}
+
+// IMPORT CONFIG MODAL
+function syncConfigUI(){
+  ['phone','persona','avail'].forEach(k=>{
+    const key={phone:'enrichPhone',persona:'personaMatch',avail:'availableOnly'}[k];
+    const row=document.getElementById('opt-'+k);
+    const chk=document.getElementById('chk-'+k);
+    const checked=importConfig[key];
+    row.classList.toggle('opt-checked',checked);
+    chk.textContent=checked?'✓':'';
+  });
+  // sub-rules visibility
+  const sr=document.getElementById('sub-rules-avail');
+  if(sr)sr.style.display=importConfig.availableOnly?'block':'none';
+}
+function toggleOpt(rowId,configKey){
+  importConfig[configKey]=!importConfig[configKey];
+  syncConfigUI();
+}
+function openConfigModal(){
+  syncConfigUI();
+  document.getElementById('modal-config').classList.add('open');
+}
+function closeConfig(){document.getElementById('modal-config').classList.remove('open');}
+function confirmConfig(){
+  closeConfig();
+  // Proceed to confirm/send
+  openConfirmModal();
+}
+
+// CONFIRM MODAL
+function openConfirmModal(){
+  const v=leads.filter(isValid).length;
+  const opts=[];
+  if(importConfig.personaMatch)opts.push('Persona Match');
+  opts.push('Enrich email address');
+  if(importConfig.enrichPhone)opts.push('Enrich phone number');
+  opts.push('Link contact to company in CRM');
+  if(importConfig.availableOnly)opts.push('Available contacts only');
+
+  document.getElementById('confirm-details').innerHTML=`
+    <div><strong>Import:</strong> ${esc(importName)}</div>
+    <div><strong>Created by:</strong> ${esc(importedBy)}</div>
+    <div><strong>Leads to send:</strong> ${v}</div>
+    <div><strong>Options:</strong> ${opts.map(o=>`<span style="display:inline-block;background:rgba(255,122,89,.1);color:var(--a);border-radius:5px;padding:1px 7px;font-size:11px;margin:2px 2px 0 0">${esc(o)}</span>`).join('')}</div>`;
+  document.getElementById('modal-confirm').classList.add('open');
+}
+function closeConfirm(){document.getElementById('modal-confirm').classList.remove('open');}
+
+// SEND — point of no return, per-import lock
+function confirmSend(){
+  closeConfirm();
+  const snapshot=[...leads],name=importName,by=importedBy,cfg={...importConfig};
+  const jobId=Date.now()+'_'+Math.random().toString(36).slice(2,7);
+  document.getElementById('view-import').classList.remove('active');
+  document.getElementById('view-home').classList.add('active');
+  leads=[];idc=0;
+  activeJobs.push({id:jobId,name,by});
+  renderHome();
+  runSend(snapshot,name,by,cfg,jobId);
+}
+
+async function runSend(snapshot,name,by,cfg,jobId){
+  const results=[];
+  for(const lead of snapshot){
+    const owner=USERS.find(u=>u.name===lead.user);
+    const payload={
+      importName:name,importedBy:by,
+      firstName:lead.firstName,lastName:lead.lastName,
+      linkedinUrl:lead.linkedinUrl,companyLinkedinUrl:lead.companyUrl,
+      jobTitle:lead.jobTitle||'',
+      ownerName:lead.user,ownerId:owner?owner.id:null,
+      config:{
+        enrichEmail:true,
+        enrichPhone:cfg.enrichPhone,
+        personaMatch:cfg.personaMatch,
+        linkToCompany:true,
+        availableOnly:cfg.availableOnly
+      }
+    };
+    try{
+      const res=await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json','x-vercel-protection-bypass':BYPASS},body:JSON.stringify(payload)});
+      results.push({...payload,status:res.ok?'sent':'error'});
+    }catch{results.push({...payload,status:'error'});}
+    await new Promise(r=>setTimeout(r,150));
+  }
+  const ok=results.filter(r=>r.status==='sent').length;
+  const err=results.filter(r=>r.status==='error').length;
+  hist.unshift({id:Date.now(),name,importedBy:by,date:new Date().toLocaleString('en-GB'),total:results.length,ok,err,leads:results});
+  try{localStorage.setItem('hs_v10',JSON.stringify(hist));}catch{}
+  activeJobs=activeJobs.filter(j=>j.id!==jobId);
+  renderHome();
+  toast(err===0?`✅ "${name}" — ${ok} lead${ok!==1?'s':''} sent!`:`"${name}" — ${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
 }
 
 // TABLE CUSTOM SELECT
@@ -744,22 +954,33 @@ function filterTsel(id,v){const l=leads.find(l=>l.id===id);buildTselList(id,v,l?
 function pickTsel(id,u){const l=leads.find(l=>l.id===id);if(!l)return;l._t=true;l.user=u;closeTsel();render();footer();btn();}
 
 // LEADS
-function addRow(d={}){leads.push({id:++idc,linkedinUrl:'',companyUrl:'',user:'',status:'idle',...d});render();}
+function addRow(d={}){leads.push({id:++idc,firstName:'',lastName:'',linkedinUrl:'',companyUrl:'',jobTitle:'',user:'',status:'idle',...d});render();}
 function removeRow(id){leads=leads.filter(l=>l.id!==id);render();}
 function clearAll(){if(!leads.length||!confirm('Clear all leads?'))return;leads=[];render();}
-function isValid(l){return l.linkedinUrl.trim()&&l.companyUrl.trim()&&l.user.trim();}
+function isValid(l){return l.firstName.trim()&&l.lastName.trim()&&l.linkedinUrl.trim()&&l.companyUrl.trim()&&l.user.trim();}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
-function onInput(id,f,el){const l=leads.find(l=>l.id===id);if(!l)return;l[f]=el.value;if(l._t)el.classList.toggle('inv',!el.value.trim());footer();btn();}
-function onBlur(id,f,el){const l=leads.find(l=>l.id===id);if(!l)return;l._t=true;l[f]=el.value.trim();el.value=l[f];el.classList.toggle('inv',!l[f]);footer();btn();}
+function onInput(id,f,el){const l=leads.find(l=>l.id===id);if(!l)return;l[f]=el.value;if(l._t)el.classList.toggle('inv',!el.value.trim()&&f!=='jobTitle');footer();btn();}
+function onBlur(id,f,el){
+  const l=leads.find(l=>l.id===id);if(!l)return;
+  l._t=true;l[f]=el.value.trim();el.value=l[f];
+  if(f!=='jobTitle')el.classList.toggle('inv',!l[f]);
+  footer();btn();
+}
 function render(){
   const body=document.getElementById('leads-body');
   document.getElementById('empty-state').style.display=leads.length?'none':'block';
   body.innerHTML=leads.map((l,i)=>`<tr>
     <td class="num">${i+1}</td>
+    <td><input class="ci${l._t&&!l.firstName?' inv':''}" value="${esc(l.firstName)}" placeholder="Jean"
+      oninput="onInput(${l.id},'firstName',this)" onblur="onBlur(${l.id},'firstName',this)"></td>
+    <td><input class="ci${l._t&&!l.lastName?' inv':''}" value="${esc(l.lastName)}" placeholder="Dupont"
+      oninput="onInput(${l.id},'lastName',this)" onblur="onBlur(${l.id},'lastName',this)"></td>
     <td><input class="ci${l._t&&!l.linkedinUrl?' inv':''}" value="${esc(l.linkedinUrl)}" placeholder="https://linkedin.com/in/…"
       oninput="onInput(${l.id},'linkedinUrl',this)" onblur="onBlur(${l.id},'linkedinUrl',this)"></td>
     <td><input class="ci${l._t&&!l.companyUrl?' inv':''}" value="${esc(l.companyUrl)}" placeholder="https://linkedin.com/company/…"
       oninput="onInput(${l.id},'companyUrl',this)" onblur="onBlur(${l.id},'companyUrl',this)"></td>
+    <td><input class="ci" value="${esc(l.jobTitle||'')}" placeholder="e.g. Sales Manager"
+      oninput="onInput(${l.id},'jobTitle',this)" onblur="onBlur(${l.id},'jobTitle',this)"></td>
     <td>${renderTsel(l.id,l)}</td>
     <td class="sc">${isValid(l)?'🟢':'⚪'}</td>
     <td class="ac"><button class="db" onclick="removeRow(${l.id})">✕</button></td>
@@ -771,57 +992,6 @@ function footer(){
   document.getElementById('footer-info').textContent=`${leads.length} lead${leads.length!==1?'s':''} · ${v} valid · ${leads.length-v} incomplete`;
 }
 function btn(){document.getElementById('send-btn').disabled=!(leads.length&&leads.every(isValid));}
-
-// CONFIRM
-function askConfirm(){
-  const v=leads.filter(isValid).length;
-  document.getElementById('confirm-details').innerHTML=
-    `<div><strong>Import:</strong> ${esc(importName)}</div>
-     <div><strong>Created by:</strong> ${esc(importedBy)}</div>
-     <div><strong>Leads to send:</strong> ${v}</div>`;
-  document.getElementById('modal-confirm').classList.add('open');
-}
-function closeConfirm(){document.getElementById('modal-confirm').classList.remove('open');}
-
-// SEND — point of no return, per-import lock only
-function confirmSend(){
-  closeConfirm();
-  const snapshot=[...leads],name=importName,by=importedBy;
-  const jobId=Date.now()+'_'+Math.random().toString(36).slice(2,7);
-  document.getElementById('view-import').classList.remove('active');
-  document.getElementById('view-home').classList.add('active');
-  leads=[];idc=0;
-  activeJobs.push({id:jobId,name,by});
-  renderHome();
-  runSend(snapshot,name,by,jobId);
-}
-
-async function runSend(snapshot,name,by,jobId){
-  const results=[];
-  for(const lead of snapshot){
-    const owner=USERS.find(u=>u.name===lead.user);
-    const payload={
-      importName:name,
-      importedBy:by,
-      linkedinUrl:lead.linkedinUrl,
-      companyLinkedinUrl:lead.companyUrl,
-      ownerName:lead.user,
-      ownerId:owner?owner.id:null
-    };
-    try{
-      const res=await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json','x-vercel-protection-bypass':BYPASS},body:JSON.stringify(payload)});
-      results.push({...payload,status:res.ok?'sent':'error'});
-    }catch{results.push({...payload,status:'error'});}
-    await new Promise(r=>setTimeout(r,150));
-  }
-  const ok=results.filter(r=>r.status==='sent').length;
-  const err=results.filter(r=>r.status==='error').length;
-  hist.unshift({id:Date.now(),name,importedBy:by,date:new Date().toLocaleString('en-GB'),total:results.length,ok,err,leads:results});
-  try{localStorage.setItem('hs_v8',JSON.stringify(hist));}catch{}
-  activeJobs=activeJobs.filter(j=>j.id!==jobId);
-  renderHome();
-  toast(err===0?`✅ "${name}" — ${ok} lead${ok!==1?'s':''} sent!`:`"${name}" — ${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
-}
 
 // NAVIGATION
 function goHome(){
@@ -866,11 +1036,14 @@ function renderHome(){
       </div>
       <div class="bcard-bd">
         <table class="btbl">
-          <thead><tr><th>LinkedIn Profile</th><th>Company LinkedIn</th><th>Owner</th><th>Status</th></tr></thead>
+          <thead><tr><th>First</th><th>Last</th><th>LinkedIn</th><th>Company</th><th>Job Title</th><th>Owner</th><th>Status</th></tr></thead>
           <tbody>${b.leads.map(l=>`<tr>
+            <td>${esc(l.firstName||'')}</td>
+            <td>${esc(l.lastName||'')}</td>
             <td title="${esc(l.linkedinUrl)}">${esc(l.linkedinUrl)}</td>
             <td title="${esc(l.companyLinkedinUrl)}">${esc(l.companyLinkedinUrl)}</td>
-            <td>${esc(l.user)}</td>
+            <td>${esc(l.jobTitle||'—')}</td>
+            <td>${esc(l.ownerName||l.user||'')}</td>
             <td class="${l.status==='sent'?'s-ok':'s-err'}">${l.status==='sent'?'✅ Sent':'❌ Error'}</td>
           </tr>`).join('')}</tbody>
         </table>
