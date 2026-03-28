@@ -389,10 +389,35 @@ td.ac{width:38px;text-align:center}
         <div class="stat"><div class="stat-n" id="s-err">0</div><div class="stat-l">Errors</div></div>
       </div>
       <div class="inprogress-list" id="inprogress-list"></div>
-      <div class="sec-title">Import history <span class="sec-badge" id="hist-badge">0</span></div>
+      <div class="sec-title" style="margin-bottom:12px">Import history <span class="sec-badge" id="hist-badge">0</span></div>
+
+      <!-- FILTERS BAR -->
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+        <input id="f-search" type="text" placeholder="🔍 Search by import name…" oninput="filterHist()"
+          style="flex:1;min-width:180px;background:rgba(255,255,255,.05);border:1px solid var(--b2);border-radius:9px;padding:8px 14px;color:var(--t);font-size:13px;outline:none;font-family:inherit;transition:all .15s"
+          onfocus="this.style.borderColor='var(--a)';this.style.boxShadow='0 0 0 2px rgba(255,122,89,.12)'"
+          onblur="this.style.borderColor='';this.style.boxShadow=''">
+        <div class="sel-wrap" id="f-user-wrap" style="min-width:180px;flex:1">
+          <div class="sel-trigger" id="f-user-trig" style="padding:8px 14px;font-size:13px" onclick="toggleFUserSel()" tabindex="0">
+            <span class="sel-value sel-ph" id="f-user-val">👤 Filter by user…</span>
+            <span class="sel-arrow">▼</span>
+          </div>
+          <div class="sel-dd" id="f-user-dd" style="display:none">
+            <div class="sel-search"><input type="text" placeholder="Search…" oninput="filterFUserList(this.value)" id="f-user-srch"></div>
+            <div class="sel-list" id="f-user-list"></div>
+          </div>
+        </div>
+        <input id="f-date" type="date" onchange="filterHist()"
+          style="background:rgba(255,255,255,.05);border:1px solid var(--b2);border-radius:9px;padding:8px 14px;color:var(--t);font-size:13px;outline:none;font-family:inherit;cursor:pointer;transition:all .15s;color-scheme:dark"
+          onfocus="this.style.borderColor='var(--a)'" onblur="this.style.borderColor=''">
+        <button onclick="clearFilters()" style="background:rgba(255,255,255,.05);border:1px solid var(--b);border-radius:9px;padding:8px 14px;color:var(--t3);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s"
+          onmouseover="this.style.color='var(--t)'" onmouseout="this.style.color='var(--t3)'">✕ Clear</button>
+      </div>
+
       <div class="hist-scroll">
         <div id="hist-list"></div>
         <div class="hist-empty" id="hist-empty"><div class="ei">📭</div><p>No imports yet. Start your first one above.</p></div>
+        <div class="hist-empty" id="hist-no-results" style="display:none"><div class="ei">🔍</div><p>No imports match your filters.</p></div>
       </div>
     </div>
   </div>
@@ -731,6 +756,10 @@ document.addEventListener('mousemove',e=>{
 
 // CLOSE DROPDOWNS
 document.addEventListener('click',e=>{
+  if(!document.getElementById('f-user-wrap')?.contains(e.target)){
+    document.getElementById('f-user-dd').style.display='none';
+    document.getElementById('f-user-trig')?.classList.remove('open');
+  }
   if(!document.getElementById('modal-sel-wrap')?.contains(e.target)){
     document.getElementById('modal-sel-dd').style.display='none';
     document.getElementById('modal-sel-trig')?.classList.remove('open');
@@ -781,6 +810,18 @@ function confirmNew(){
   document.getElementById('m-name').classList.toggle('err',!n);if(!n)ok=false;
   document.getElementById('modal-sel-trig').classList.toggle('err',!mSelVal);if(!mSelVal)ok=false;
   if(!ok)return;
+  // Prevent duplicate import names
+  const duplicate=hist.some(b=>b.name.trim().toLowerCase()===n.toLowerCase());
+  if(duplicate){
+    document.getElementById('m-name').classList.add('err');
+    document.getElementById('m-name').setCustomValidity('duplicate');
+    // show inline error
+    let errEl=document.getElementById('m-name-err');
+    if(!errEl){errEl=document.createElement('div');errEl.id='m-name-err';errEl.style.cssText='font-size:12px;color:var(--err);margin-top:6px';document.getElementById('m-name').after(errEl);}
+    errEl.textContent='An import with this name already exists. Please choose a different name.';
+    return;
+  }
+  const errEl=document.getElementById('m-name-err');if(errEl)errEl.remove();
   closeNew();
   importName=n;importedBy=mSelVal;leads=[];idc=0;
   importCode='IMP-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
@@ -1037,7 +1078,91 @@ async function runSend(snapshot,name,by,c,jobId){
   toast(err===0?`✅ "${name}" — ${ok} lead${ok!==1?'s':''} sent!`:`"${name}" — ${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
 }
 
-// TABLE SELECT
+// FILTER STATE
+let fUser='',fDate='';
+
+// Filter user dropdown
+function buildFUserList(f=''){
+  const allUsers=[...new Set(hist.map(b=>b.importedBy).filter(Boolean))].sort();
+  const items=allUsers.filter(u=>!f||u.toLowerCase().includes(f.toLowerCase()));
+  document.getElementById('f-user-list').innerHTML=
+    `<div class="sel-opt${!fUser?' selected':''}" onclick="pickFUser('')">— All users —<span class="ck">✓</span></div>`+
+    items.map(u=>`<div class="sel-opt${fUser===u?' selected':''}" onclick="pickFUser('${esc(u)}')">${esc(u)}<span class="ck">✓</span></div>`).join('');
+}
+function toggleFUserSel(){
+  const dd=document.getElementById('f-user-dd'),tr=document.getElementById('f-user-trig');
+  const open=dd.style.display!=='none';
+  dd.style.display=open?'none':'block';tr.classList.toggle('open',!open);
+  if(!open){document.getElementById('f-user-srch').value='';buildFUserList();setTimeout(()=>document.getElementById('f-user-srch').focus(),50);}
+}
+function filterFUserList(v){buildFUserList(v);}
+function pickFUser(u){
+  fUser=u;
+  const el=document.getElementById('f-user-val');
+  el.textContent=u?u:'👤 Filter by user…';
+  el.classList.toggle('sel-ph',!u);
+  document.getElementById('f-user-trig').classList.remove('open');
+  document.getElementById('f-user-dd').style.display='none';
+  filterHist();
+}
+function clearFilters(){
+  fUser='';fDate='';
+  document.getElementById('f-search').value='';
+  document.getElementById('f-date').value='';
+  const el=document.getElementById('f-user-val');el.textContent='👤 Filter by user…';el.classList.add('sel-ph');
+  document.getElementById('f-user-trig').classList.remove('open','selected');
+  filterHist();
+}
+function filterHist(){
+  const search=document.getElementById('f-search').value.trim().toLowerCase();
+  fDate=document.getElementById('f-date').value;
+  const filtered=hist.filter(b=>{
+    if(search&&!b.name.toLowerCase().includes(search))return false;
+    if(fUser&&b.importedBy!==fUser)return false;
+    if(fDate){
+      // b.date is like "28/03/2026, 17:05:00" — parse day/month/year
+      const parts=b.date.split(/[\/,\s:]+/);
+      const bDay=parts[0],bMonth=parts[1],bYear=parts[2];
+      const bDateStr=`${bYear}-${bMonth.padStart(2,'0')}-${bDay.padStart(2,'0')}`;
+      if(bDateStr!==fDate)return false;
+    }
+    return true;
+  });
+  document.getElementById('hist-empty').style.display=hist.length===0?'block':'none';
+  document.getElementById('hist-no-results').style.display=hist.length>0&&filtered.length===0?'block':'none';
+  renderHistList(filtered);
+}
+function renderHistList(items){
+  document.getElementById('hist-list').innerHTML=items.map(b=>`
+    <div class="bcard" id="bc${b.id}">
+      <div class="bcard-hd" onclick="toggleB(${b.id})">
+        <div class="bcard-ico">📦</div>
+        <div class="bcard-meta">
+          <div class="bcard-name">${esc(b.name)}</div>
+          <div class="bcard-sub">${b.date} · by <strong>${esc(b.importedBy||'—')}</strong></div>
+        </div>
+        <div class="bcard-pills">
+          <span class="pill pill-t">${b.total} lead${b.total!==1?'s':''}</span>
+          ${b.ok?`<span class="pill pill-ok">✅ ${b.ok}</span>`:''}
+          ${b.err?`<span class="pill pill-err">❌ ${b.err}</span>`:''}
+        </div>
+        <span class="bcard-chev">▶</span>
+      </div>
+      <div class="bcard-bd">
+        <table class="btbl">
+          <thead><tr><th>First</th><th>Last</th><th>LinkedIn</th><th>Company</th><th>Job Title</th><th>Owner</th><th>Status</th></tr></thead>
+          <tbody>${b.leads.map(l=>`<tr>
+            <td>${esc(l.firstName||'')}</td><td>${esc(l.lastName||'')}</td>
+            <td title="${esc(l.linkedinUrl)}">${esc(l.linkedinUrl)}</td>
+            <td title="${esc(l.companyLinkedinUrl)}">${esc(l.companyLinkedinUrl)}</td>
+            <td>${esc(l.jobTitle||'—')}</td>
+            <td>${esc(l.ownerName||'')}</td>
+            <td class="${l.status==='sent'?'s-ok':'s-err'}">${l.status==='sent'?'✅ Sent':'❌ Error'}</td>
+          </tr>`).join('')}</tbody>
+        </table>
+      </div>
+    </div>`).join('');
+}
 let openTsel=null;
 function closeTsel(){
   if(openTsel){document.getElementById('tdd-'+openTsel)?.remove();document.getElementById('ttr-'+openTsel)?.classList.remove('open');openTsel=null;}
@@ -1117,6 +1242,7 @@ function renderHome(){
   document.getElementById('s-err').textContent=hist.reduce((a,b)=>a+b.err,0);
   document.getElementById('hist-badge').textContent=hist.length;
   document.getElementById('hist-empty').style.display=hist.length?'none':'block';
+  document.getElementById('hist-no-results').style.display='none';
   document.getElementById('inprogress-list').innerHTML=activeJobs.map(j=>`
     <div class="ip-card">
       <div class="ip-spinner"><svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="14"/><circle class="arc" cx="17" cy="17" r="14" stroke-dashoffset="22"/></svg></div>
@@ -1127,35 +1253,8 @@ function renderHome(){
         <div class="ip-msg">Your contacts are being imported into the CRM.<br>You'll receive a <strong>Slack message</strong> when the import is complete.</div>
       </div>
     </div>`).join('');
-  document.getElementById('hist-list').innerHTML=hist.map(b=>`
-    <div class="bcard" id="bc${b.id}">
-      <div class="bcard-hd" onclick="toggleB(${b.id})">
-        <div class="bcard-ico">📦</div>
-        <div class="bcard-meta">
-          <div class="bcard-name">${esc(b.name)}</div>
-          <div class="bcard-sub">${b.date} · by <strong>${esc(b.importedBy||'—')}</strong></div>
-        </div>
-        <div class="bcard-pills">
-          <span class="pill pill-t">${b.total} lead${b.total!==1?'s':''}</span>
-          ${b.ok?`<span class="pill pill-ok">✅ ${b.ok}</span>`:''}
-          ${b.err?`<span class="pill pill-err">❌ ${b.err}</span>`:''}
-        </div>
-        <span class="bcard-chev">▶</span>
-      </div>
-      <div class="bcard-bd">
-        <table class="btbl">
-          <thead><tr><th>First</th><th>Last</th><th>LinkedIn</th><th>Company</th><th>Job Title</th><th>Owner</th><th>Status</th></tr></thead>
-          <tbody>${b.leads.map(l=>`<tr>
-            <td>${esc(l.firstName||'')}</td><td>${esc(l.lastName||'')}</td>
-            <td title="${esc(l.linkedinUrl)}">${esc(l.linkedinUrl)}</td>
-            <td title="${esc(l.companyLinkedinUrl)}">${esc(l.companyLinkedinUrl)}</td>
-            <td>${esc(l.jobTitle||'—')}</td>
-            <td>${esc(l.ownerName||'')}</td>
-            <td class="${l.status==='sent'?'s-ok':'s-err'}">${l.status==='sent'?'✅ Sent':'❌ Error'}</td>
-          </tr>`).join('')}</tbody>
-        </table>
-      </div>
-    </div>`).join('');
+  buildFUserList();
+  renderHistList(hist);
 }
 function toggleB(id){document.getElementById('bc'+id).classList.toggle('open');}
 function toast(msg,type='info'){
