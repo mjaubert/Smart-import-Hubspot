@@ -36,7 +36,7 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .btn-primary{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;box-shadow:0 4px 16px rgba(255,122,89,.28)}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(255,122,89,.42)}
 .btn-primary:active{transform:translateY(0)}
-.btn-primary:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-primary:disabled{opacity:.32;cursor:not-allowed;transform:none;box-shadow:none;filter:grayscale(.3)}
 .btn-ghost{background:rgba(255,255,255,.06);color:var(--t2);border:1px solid var(--b2)}
 .btn-ghost:hover{background:rgba(255,255,255,.1);color:var(--t);border-color:rgba(255,122,89,.3)}
 .btn-danger{background:rgba(248,113,113,.08);color:var(--err);border:1px solid rgba(248,113,113,.18)}
@@ -44,11 +44,15 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .btn-sm{padding:6px 13px;font-size:12px;border-radius:9px}
 .btn-lg{padding:13px 28px;font-size:15px;border-radius:14px}
 
+/* CTA ready state */
+#send-btn:not(:disabled){padding:8px 20px;font-size:13.5px;box-shadow:0 4px 20px rgba(255,122,89,.45),0 0 0 1px rgba(255,122,89,.2)}
+#send-btn:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,122,89,.55)}
+
 /* VIEWS */
 .view{display:none;flex:1;flex-direction:column}
 .view.active{display:flex}
 
-/* ═══ HOME ═══ */
+/* HOME */
 .home{padding:56px 32px 48px;flex:1;max-width:860px;width:100%;margin:0 auto}
 .hero{text-align:center;margin-bottom:56px}
 .hero h2{font-size:44px;font-weight:800;letter-spacing:-2px;line-height:1.1;margin-bottom:14px}
@@ -73,8 +77,8 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 @keyframes spin{to{transform:rotate(360deg)}}
 .ip-body{flex:1}
 .ip-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#a5b4fc;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.ip-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#818cf8;animation:pulse-dot 1.5s ease-in-out infinite}
-@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+.ip-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#818cf8;animation:pdot 1.5s ease-in-out infinite}
+@keyframes pdot{0%,100%{opacity:1}50%{opacity:.4}}
 .ip-name{font-size:15px;font-weight:700;color:var(--t);margin-bottom:2px}
 .ip-by{font-size:12px;color:var(--t3);margin-bottom:7px}
 .ip-msg{font-size:13px;color:var(--t2);line-height:1.6}
@@ -113,7 +117,7 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .s-ok{color:#34d399!important;font-weight:600}
 .s-err{color:var(--err)!important;font-weight:600}
 
-/* ═══ OVERLAYS ═══ */
+/* OVERLAYS */
 .overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.78);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;padding:20px}
 .overlay.open{display:flex}
 .modal{background:linear-gradient(160deg,#13131f,#0f0f18);border:1px solid rgba(255,255,255,.1);border-radius:var(--rxl);padding:40px;width:100%;max-width:480px;box-shadow:0 40px 80px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.04) inset;animation:mIn .28s cubic-bezier(.34,1.46,.64,1)}
@@ -129,7 +133,7 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .fi:hover{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.07)}
 .fi:focus{border-color:var(--a);background:rgba(255,122,89,.06);box-shadow:0 0 0 3px rgba(255,122,89,.13)}
 .fi.err{border-color:var(--err)!important;background:rgba(248,113,113,.06)!important;box-shadow:0 0 0 3px rgba(248,113,113,.1)!important}
-.modal-actions{display:flex;gap:10px;margin-top:8px}
+.modal-actions{display:flex;gap:10px;margin-top:20px}
 .modal-actions .btn{flex:1;padding:12px}
 
 /* CUSTOM SELECT */
@@ -156,51 +160,14 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .sel-opt .ck{opacity:0;font-size:12px}
 .sel-opt.selected .ck{opacity:1}
 
-/* CONFIRM */
-.confirm-ico{width:56px;height:56px;border-radius:16px;background:rgba(255,122,89,.15);border:1px solid rgba(255,122,89,.25);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px}
-.confirm-details{background:rgba(255,255,255,.04);border:1px solid var(--b);border-radius:var(--r);padding:14px 16px;margin-bottom:24px;font-size:13px;color:var(--t2)}
-.confirm-details strong{color:var(--t);font-weight:700}
-.confirm-details div{margin-bottom:5px}
-.confirm-details div:last-child{margin-bottom:0}
-
-/* ═══ IMPORT CONFIG MODAL ═══ */
-.config-modal{max-width:520px}
-.config-section{margin-bottom:20px}
-.config-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.config-section-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
-
-/* Option row */
-.opt-row{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:var(--r);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);margin-bottom:8px;transition:all .15s;cursor:pointer;user-select:none}
-.opt-row:last-child{margin-bottom:0}
-.opt-row:hover:not(.opt-locked){background:rgba(255,255,255,.05);border-color:rgba(255,122,89,.2)}
-.opt-row.opt-checked{background:rgba(255,122,89,.06);border-color:rgba(255,122,89,.2)}
-.opt-row.opt-locked{cursor:default;opacity:.9}
-.opt-row.opt-locked.opt-checked{background:rgba(16,185,129,.05);border-color:rgba(16,185,129,.2)}
-
-/* Checkbox */
-.opt-check{width:18px;height:18px;border-radius:5px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:11px}
-.opt-row.opt-checked .opt-check{background:var(--a);border-color:var(--a);color:#fff;box-shadow:0 2px 8px rgba(255,122,89,.3)}
-.opt-row.opt-locked.opt-checked .opt-check{background:var(--ok);border-color:var(--ok);color:#fff;box-shadow:0 2px 8px rgba(16,185,129,.3)}
-
-.opt-body{flex:1;min-width:0}
-.opt-title{font-size:13px;font-weight:600;color:var(--t);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.opt-locked-badge{font-size:10px;font-weight:700;color:var(--ok);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:999px;padding:1px 7px;letter-spacing:.03em;text-transform:uppercase}
-.opt-desc{font-size:12px;color:var(--t3);margin-top:3px;line-height:1.5}
-
-/* Sub-rules */
-.sub-rules{margin-top:10px;padding:10px 14px;background:rgba(255,255,255,.025);border-radius:9px;border:1px solid rgba(255,255,255,.05)}
-.sub-rules-title{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
-.sub-rule{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--t2);padding:3px 0}
-.sub-rule::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(16,185,129,.5);flex-shrink:0}
-
-/* ═══ IMPORT VIEW ═══ */
+/* IMPORT VIEW */
 .imp-bar{display:flex;align-items:center;gap:12px;padding:14px 32px;border-bottom:1px solid var(--b);backdrop-filter:blur(20px);background:rgba(8,8,14,.8);flex-wrap:wrap}
 .back{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--t2);font-size:16px;transition:all .18s;flex-shrink:0}
 .back:hover{background:rgba(255,255,255,.12);color:var(--t);border-color:rgba(255,122,89,.3)}
 .imp-info{flex:1;min-width:0}
 .imp-title-txt{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .imp-by{font-size:12px;color:var(--t3);margin-top:2px}
-.imp-acts{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.imp-acts{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;align-items:center}
 
 /* CSV UPLOAD */
 .csv-drop{position:relative;cursor:pointer;display:inline-block}
@@ -209,10 +176,8 @@ header{padding:16px 32px;display:flex;align-items:center;justify-content:space-b
 .csv-drop:hover .csv-drop-inner{background:rgba(255,255,255,.1);border-color:rgba(255,122,89,.3);color:var(--t)}
 .csv-drop.has-file .csv-drop-inner{background:rgba(255,122,89,.1);border-color:rgba(255,122,89,.35);color:var(--a)}
 .csv-fname{max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
 .pb{height:2px;background:rgba(255,255,255,.05)}
 .pf{height:100%;background:linear-gradient(90deg,var(--a),var(--a3));width:0%;transition:width .3s}
-
 .table-wrap{overflow-x:auto;padding:20px 32px 16px;flex:1}
 table{width:100%;border-collapse:collapse;min-width:700px}
 thead tr{background:rgba(255,255,255,.025)}
@@ -235,7 +200,7 @@ td.ac{width:38px;text-align:center}
 .empty-state{text-align:center;padding:64px 24px;color:var(--t3)}
 .empty-state p{font-size:14px;margin-top:8px}
 
-/* TABLE CUSTOM SELECT */
+/* TABLE SELECT */
 .tsel-wrap{position:relative}
 .tsel-trigger{width:100%;background:rgba(255,255,255,.05);border:1px solid transparent;border-radius:8px;padding:7px 10px;color:var(--t);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:6px;transition:all .14s;user-select:none}
 .tsel-trigger:hover{border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.08)}
@@ -256,7 +221,7 @@ td.ac{width:38px;text-align:center}
 .tsel-opt:hover{background:rgba(255,122,89,.1);color:var(--t)}
 .tsel-opt.sel{background:rgba(255,122,89,.15);color:var(--a);font-weight:600}
 
-/* CSV MAPPING MODAL */
+/* CSV MAPPING */
 .map-modal{max-width:560px}
 .map-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
 .map-row{display:grid;grid-template-columns:1fr 32px 1fr;align-items:center;gap:10px}
@@ -306,27 +271,66 @@ td.ac{width:38px;text-align:center}
 .owner-err{font-size:12px;color:var(--err);margin-top:8px;display:none}
 .owner-err.show{display:block}
 
-/* CTA — ready state emphasis */
-#send-btn:not(:disabled){
-  padding:8px 20px;
-  font-size:13.5px;
-  box-shadow:0 4px 20px rgba(255,122,89,.45),0 0 0 1px rgba(255,122,89,.2);
-  letter-spacing:-.15px;
-}
-#send-btn:not(:disabled):hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 28px rgba(255,122,89,.55),0 0 0 1px rgba(255,122,89,.3);
-}
-/* CTA — disabled state */
-#send-btn:disabled{
-  opacity:.32;
-  cursor:not-allowed;
-  filter:grayscale(.3);
-}
-/* Tooltip on disabled */
-#send-btn:disabled{position:relative}
-#send-btn[title]{position:relative}
+/* ══════════════════════════════
+   MULTI-STEP CONFIG MODAL
+══════════════════════════════ */
+.cfg-modal{max-width:500px}
 
+/* Progress bar */
+.cfg-progress{display:flex;align-items:center;gap:0;margin-bottom:32px}
+.cfg-step-dot{display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;flex:1}
+.cfg-step-dot:not(:last-child)::after{content:'';position:absolute;top:14px;left:50%;width:100%;height:2px;background:rgba(255,255,255,.08);z-index:0}
+.cfg-step-dot.done:not(:last-child)::after{background:rgba(255,122,89,.3)}
+.cfg-dot{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--t3);transition:all .25s;z-index:1;position:relative}
+.cfg-step-dot.active .cfg-dot{border-color:var(--a);background:rgba(255,122,89,.15);color:var(--a)}
+.cfg-step-dot.done .cfg-dot{border-color:var(--ok);background:rgba(16,185,129,.15);color:var(--ok);font-size:13px}
+.cfg-dot-label{font-size:10px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;text-align:center;white-space:nowrap}
+.cfg-step-dot.active .cfg-dot-label{color:var(--a)}
+.cfg-step-dot.done .cfg-dot-label{color:var(--ok)}
+
+/* Step panels */
+.cfg-panel{display:none;animation:panelIn .22s ease}
+.cfg-panel.active{display:block}
+@keyframes panelIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+@keyframes panelBack{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
+.cfg-panel.back{animation:panelBack .22s ease}
+
+.cfg-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t3);margin-bottom:8px}
+.cfg-title{font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--t);margin-bottom:6px}
+.cfg-desc{font-size:13px;color:var(--t3);line-height:1.6;margin-bottom:24px}
+
+/* Toggle option */
+.tog-row{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--r);border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);cursor:pointer;user-select:none;transition:all .18s}
+.tog-row:hover{background:rgba(255,255,255,.055);border-color:rgba(255,122,89,.2)}
+.tog-row.on{background:rgba(255,122,89,.07);border-color:rgba(255,122,89,.25)}
+.tog-body{flex:1}
+.tog-label{font-size:14px;font-weight:600;color:var(--t);margin-bottom:3px}
+.tog-sub{font-size:12px;color:var(--t3);line-height:1.5}
+.tog-switch{width:42px;height:24px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);position:relative;transition:all .2s;flex-shrink:0}
+.tog-row.on .tog-switch{background:var(--a);border-color:var(--a);box-shadow:0 2px 10px rgba(255,122,89,.35)}
+.tog-knob{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.tog-row.on .tog-knob{transform:translateX(18px)}
+
+/* Filter rules list */
+.filter-rules{margin-top:14px;border-radius:10px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);overflow:hidden}
+.filter-rule{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;color:var(--t2)}
+.filter-rule:last-child{border-bottom:none}
+.filter-rule::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(16,185,129,.5);flex-shrink:0}
+
+/* Review step */
+.review-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.review-row:last-child{border-bottom:none}
+.review-label{font-size:13px;color:var(--t3)}
+.review-val{font-size:13px;font-weight:600}
+.review-val.on{color:#34d399}
+.review-val.off{color:var(--t3)}
+.review-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);padding:14px 16px;margin-bottom:14px}
+.review-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);margin-bottom:10px}
+.info-block{display:flex;align-items:flex-start;gap:9px;padding:11px 14px;background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:var(--r);margin-top:14px}
+.info-block p{font-size:12px;color:var(--t3);line-height:1.6}
+.info-block p strong{color:#34d399;font-weight:600}
+
+/* TOASTS */
 .tw{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:999}
 .toast{padding:12px 18px;border-radius:var(--r);font-size:13px;font-weight:500;box-shadow:0 8px 28px rgba(0,0,0,.55);animation:tIn .3s cubic-bezier(.34,1.46,.64,1);max-width:320px;backdrop-filter:blur(16px)}
 .toast.success{background:rgba(6,78,59,.95);color:#34d399;border:1px solid rgba(52,211,153,.2)}
@@ -388,7 +392,7 @@ td.ac{width:38px;text-align:center}
         </label>
         <button class="btn btn-ghost btn-sm" onclick="addRow()">＋ Add row</button>
         <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑</button>
-        <button class="btn btn-primary btn-sm" id="send-btn" onclick="openConfigModal()" disabled title="Import setup is not complete yet. Please fill all required fields before continuing.">⚙️ Configure import in CRM</button>
+        <button class="btn btn-primary btn-sm" id="send-btn" onclick="openCfgModal()" disabled title="Import setup is not complete yet. Please fill all required fields before continuing.">⚙️ Configure import in CRM</button>
       </div>
     </div>
     <div class="pb"><div class="pf" id="progress"></div></div>
@@ -451,7 +455,7 @@ td.ac{width:38px;text-align:center}
   <div class="modal map-modal">
     <div class="modal-badge">📊 CSV Import</div>
     <h3>Map your columns</h3>
-    <p class="modal-desc">Detected <strong id="map-col-count">0</strong> columns · <strong id="map-row-count">0</strong> rows. Match each CSV column to its HubSpot destination.</p>
+    <p class="modal-desc">Detected <strong id="map-col-count">0</strong> columns · <strong id="map-row-count">0</strong> rows. Match each CSV column to its destination.</p>
     <div class="map-grid">
       <div class="map-row">
         <select class="map-csv-sel" id="map-firstname"></select>
@@ -508,102 +512,135 @@ td.ac{width:38px;text-align:center}
   </div>
 </div>
 
-<!-- IMPORT CONFIG MODAL -->
-<div class="overlay" id="modal-config" onclick="if(event.target===this)closeConfig()">
-  <div class="modal config-modal">
-    <div class="modal-badge">⚙️ Import Configuration</div>
-    <h3>Configure your import</h3>
-    <p class="modal-desc">Select how this import should be processed. Locked options are always applied.</p>
+<!-- MULTI-STEP CONFIG MODAL -->
+<div class="overlay" id="modal-cfg">
+  <div class="modal cfg-modal">
 
-    <!-- ENRICHMENT -->
-    <div class="config-section">
-      <div class="config-section-label">Enrichment</div>
-
-      <div class="opt-row opt-locked opt-checked" title="Always applied — cannot be disabled">
-        <div class="opt-check">✓</div>
-        <div class="opt-body">
-          <div class="opt-title">Enrich email address <span class="opt-locked-badge">Always on</span></div>
-          <div class="opt-desc">Automatically find and attach a professional email for each contact.</div>
-        </div>
+    <!-- Progress indicator -->
+    <div class="cfg-progress">
+      <div class="cfg-step-dot active" id="sdot-1">
+        <div class="cfg-dot" id="sdot-n1">1</div>
+        <div class="cfg-dot-label">Qualification</div>
       </div>
-
-      <div class="opt-row opt-checked" id="opt-phone" onclick="toggleOpt('opt-phone','enrichPhone')">
-        <div class="opt-check" id="chk-phone"></div>
-        <div class="opt-body">
-          <div class="opt-title">Enrich phone number</div>
-          <div class="opt-desc">Attempt to find a phone number for each contact.</div>
-        </div>
+      <div class="cfg-step-dot" id="sdot-2">
+        <div class="cfg-dot" id="sdot-n2">2</div>
+        <div class="cfg-dot-label">Enrichment</div>
       </div>
-
-      <div class="opt-row opt-checked" id="opt-persona" onclick="toggleOpt('opt-persona','personaMatch')">
-        <div class="opt-check" id="chk-persona"></div>
-        <div class="opt-body">
-          <div class="opt-title">Persona Match <span style="font-size:12px;color:var(--t3);font-weight:400">(checks whether the contact fits our ICP)</span></div>
-          <div class="opt-desc">Verify whether each contact matches your Ideal Customer Profile before import.</div>
-        </div>
+      <div class="cfg-step-dot" id="sdot-3">
+        <div class="cfg-dot" id="sdot-n3">3</div>
+        <div class="cfg-dot-label">Filtering</div>
+      </div>
+      <div class="cfg-step-dot" id="sdot-4">
+        <div class="cfg-dot" id="sdot-n4">4</div>
+        <div class="cfg-dot-label">Review</div>
       </div>
     </div>
 
-    <!-- CRM LINKING -->
-    <div class="config-section">
-      <div class="config-section-label">CRM</div>
-
-      <div class="opt-row opt-locked opt-checked" title="Always applied — cannot be disabled">
-        <div class="opt-check">✓</div>
-        <div class="opt-body">
-          <div class="opt-title">Link contact to company in CRM <span class="opt-locked-badge">Always on</span></div>
-          <div class="opt-desc">Automatically associate each contact with their company record in HubSpot.</div>
+    <!-- STEP 1 — Qualification -->
+    <div class="cfg-panel active" id="cfg-panel-1">
+      <div class="cfg-eyebrow">Step 1 of 4</div>
+      <div class="cfg-title">Qualification</div>
+      <div class="cfg-desc">Should we verify whether each contact fits your Ideal Customer Profile before importing?</div>
+      <div class="tog-row on" id="tog-persona" onclick="toggleCfg('personaMatch','tog-persona')">
+        <div class="tog-body">
+          <div class="tog-label">Persona Match <span style="font-size:12px;color:var(--t3);font-weight:400">(checks whether the contact fits our ICP)</span></div>
+          <div class="tog-sub">Each contact will be evaluated against your ICP criteria before being added to your CRM.</div>
         </div>
+        <div class="tog-switch"><div class="tog-knob"></div></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeCfg()">Cancel</button>
+        <button class="btn btn-primary" onclick="goStep(2)">Next →</button>
       </div>
     </div>
 
-    <!-- FILTERING -->
-    <div class="config-section">
-      <div class="config-section-label">Filtering</div>
-
-      <div class="opt-row opt-checked" id="opt-avail" onclick="toggleOpt('opt-avail','availableOnly')">
-        <div class="opt-check" id="chk-avail"></div>
-        <div class="opt-body">
-          <div class="opt-title">Import only available contacts for prospection</div>
-          <div class="opt-desc">Only import contacts that are currently open for outreach.</div>
-          <div class="sub-rules" id="sub-rules-avail">
-            <div class="sub-rules-title">Included filters</div>
-            <div class="sub-rule">Not associated to client companies</div>
-            <div class="sub-rule">Not a partnership contact</div>
-            <div class="sub-rule">Not associated to companies with open deals</div>
-            <div class="sub-rule">Not already worked by another BDR</div>
-          </div>
+    <!-- STEP 2 — Enrichment -->
+    <div class="cfg-panel" id="cfg-panel-2">
+      <div class="cfg-eyebrow">Step 2 of 4</div>
+      <div class="cfg-title">Enrichment</div>
+      <div class="cfg-desc">Select which additional data you want to enrich for each contact.</div>
+      <div class="tog-row" id="tog-phone" onclick="toggleCfg('enrichPhone','tog-phone')">
+        <div class="tog-body">
+          <div class="tog-label">Enrich phone number</div>
+          <div class="tog-sub">Attempt to find and attach a phone number for each contact.</div>
         </div>
+        <div class="tog-switch"><div class="tog-knob"></div></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="goStep(1,'back')">← Back</button>
+        <button class="btn btn-primary" onclick="goStep(3)">Next →</button>
       </div>
     </div>
 
-    <!-- No duplicates notice -->
-    <div style="display:flex;align-items:flex-start;gap:9px;padding:11px 14px;background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.15);border-radius:var(--r);margin-bottom:20px">
-      <span style="font-size:14px;flex-shrink:0;margin-top:1px">🔒</span>
-      <p style="font-size:12px;color:var(--t3);line-height:1.6">
-        <strong style="color:#34d399;font-weight:600">No duplicates will be created.</strong>
-        Existing contacts will be automatically detected and added to the import instead of being recreated.
-      </p>
+    <!-- STEP 3 — Filtering -->
+    <div class="cfg-panel" id="cfg-panel-3">
+      <div class="cfg-eyebrow">Step 3 of 4</div>
+      <div class="cfg-title">Availability</div>
+      <div class="cfg-desc">Only import contacts that are currently open and available for prospection.</div>
+      <div class="tog-row on" id="tog-avail" onclick="toggleCfgAvail()">
+        <div class="tog-body">
+          <div class="tog-label">Import only available contacts for prospection</div>
+          <div class="tog-sub">Contacts that don't match the filters below will be excluded from this import.</div>
+        </div>
+        <div class="tog-switch"><div class="tog-knob"></div></div>
+      </div>
+      <div class="filter-rules" id="filter-rules">
+        <div class="filter-rule">Not associated to client companies</div>
+        <div class="filter-rule">Not a partnership contact</div>
+        <div class="filter-rule">Not associated to companies with open deals</div>
+        <div class="filter-rule">Not already worked by another BDR</div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="goStep(2,'back')">← Back</button>
+        <button class="btn btn-primary" onclick="goStep(4)">Next →</button>
+      </div>
     </div>
 
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeConfig()">Cancel</button>
-      <button class="btn btn-primary" onclick="confirmConfig()">Confirm & review →</button>
-    </div>
-  </div>
-</div>
+    <!-- STEP 4 — Review -->
+    <div class="cfg-panel" id="cfg-panel-4">
+      <div class="cfg-eyebrow">Step 4 of 4</div>
+      <div class="cfg-title">Review & confirm</div>
+      <div class="cfg-desc">Here's a summary of your import configuration. Everything looks good?</div>
 
-<!-- CONFIRM SEND MODAL -->
-<div class="overlay" id="modal-confirm" onclick="if(event.target===this)closeConfirm()">
-  <div class="modal" style="max-width:420px">
-    <div class="confirm-ico">🚀</div>
-    <h3>Confirm your import</h3>
-    <p class="modal-desc">Are you sure you want to validate this import?</p>
-    <div class="confirm-details" id="confirm-details"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeConfirm()">Cancel</button>
-      <button class="btn btn-primary" onclick="confirmSend()">Yes, send to HubSpot</button>
+      <div class="review-section">
+        <div class="review-section-title">Configuration</div>
+        <div class="review-row">
+          <span class="review-label">Persona Match</span>
+          <span class="review-val" id="rv-persona">—</span>
+        </div>
+        <div class="review-row">
+          <span class="review-label">Enrich phone number</span>
+          <span class="review-val" id="rv-phone">—</span>
+        </div>
+        <div class="review-row">
+          <span class="review-label">Available contacts only</span>
+          <span class="review-val" id="rv-avail">—</span>
+        </div>
+      </div>
+
+      <div class="review-section" id="rv-filters-block" style="display:none">
+        <div class="review-section-title">Active filters</div>
+        <div class="filter-rule">Not associated to client companies</div>
+        <div class="filter-rule">Not a partnership contact</div>
+        <div class="filter-rule">Not associated to companies with open deals</div>
+        <div class="filter-rule">Not already worked by another BDR</div>
+      </div>
+
+      <div class="info-block">
+        <span style="font-size:15px;flex-shrink:0">🔗</span>
+        <p><strong>Contacts will automatically be linked to their company in the CRM.</strong></p>
+      </div>
+      <div class="info-block" style="margin-top:8px">
+        <span style="font-size:15px;flex-shrink:0">🔒</span>
+        <p><strong>No duplicates will be created.</strong> If a contact already exists in the CRM, it will be updated instead of being recreated.</p>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="goStep(3,'back')">← Back</button>
+        <button class="btn btn-primary" onclick="confirmCfg()">Confirm import →</button>
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -612,8 +649,6 @@ td.ac{width:38px;text-align:center}
 <script>
 const WEBHOOK='https://api.clay.com/v3/sources/webhook/pull-in-data-from-a-webhook-be430a93-c9a6-4222-832b-fff68466e1ee';
 const BYPASS='HQ5JV0qhkuqeoAAcOy1vaNIWgxac1dRn';
-
-// Real HubSpot owners with IDs — active only, sorted alphabetically
 const USERS=[
   {name:"Aisha Roukhamieh-Mckinna",id:76163167},{name:"Alessandro De Valerio",id:88036749},
   {name:"Alexandre Collignon",id:34343353},{name:"Antoine GOEHRS",id:78593784},
@@ -655,23 +690,16 @@ const USERS=[
   {name:"Valentin Beaudon",id:75626642},{name:"Valentin Burr",id:1665294764},
   {name:"Vianney Mathorel",id:88036747},{name:"Victoria Hanne",id:102901848},
   {name:"Wendy BECHET",id:229891396},{name:"Yohan LE CLECH",id:466116392},
-  {name:"Christophe HOAREAU",id:90604097},{name:"François Lehec",id:36316288},
+  {name:"Christophe HOAREAU",id:90604097},
 ];
 
 let leads=[],idc=0,importName='',importedBy='',hist=[];
 let csvRawHeaders=[],csvRawRows=[],ownerPickVal='';
 let activeJobs=[];
+let cfg={personaMatch:true,enrichPhone:false,availableOnly:true};
+let cfgStep=1;
 
-// Import config state
-let importConfig={
-  enrichEmail:true,       // locked
-  enrichPhone:false,
-  personaMatch:true,
-  linkToCompany:true,     // locked
-  availableOnly:true,
-};
-
-try{hist=JSON.parse(localStorage.getItem('hs_v10')||'[]');}catch{}
+try{hist=JSON.parse(localStorage.getItem('hs_v11')||'[]');}catch{}
 
 // PARALLAX
 document.addEventListener('mousemove',e=>{
@@ -798,7 +826,7 @@ function pickOwner(u){
   buildOwnerList();
 }
 
-// CSV MAPPING MODAL
+// CSV MAPPING
 const MAP_ALIASES={
   firstName:['firstname','prenom','prénom','first','givenname','first_name'],
   lastName:['lastname','nom','last','surname','familyname','last_name'],
@@ -826,10 +854,8 @@ function openMapModal(){
   ['map-firstname','map-lastname','map-linkedin','map-company'].forEach(id=>{const s=document.getElementById(id);s.innerHTML=reqOpts;s.classList.remove('auto');});
   document.getElementById('map-jobtitle').innerHTML=optOpts;document.getElementById('map-jobtitle').classList.remove('auto');
   const setMap=(id,idx)=>{if(idx>=0){const s=document.getElementById(id);s.value=idx;s.classList.add('auto');}};
-  setMap('map-firstname',m.firstName);
-  setMap('map-lastname',m.lastName);
-  setMap('map-linkedin',m.linkedinUrl);
-  setMap('map-company',m.companyUrl);
+  setMap('map-firstname',m.firstName);setMap('map-lastname',m.lastName);
+  setMap('map-linkedin',m.linkedinUrl);setMap('map-company',m.companyUrl);
   setMap('map-jobtitle',m.jobTitle);
   ownerPickVal='';
   document.getElementById('owner-av').textContent='👤';document.getElementById('owner-av').classList.add('empty');
@@ -854,110 +880,125 @@ function confirmMap(){
     const first=(cols[fn]||'').trim(),last=(cols[ln]||'').trim();
     const linkedin=(cols[li]||'').trim(),company=(cols[co]||'').trim();
     const job=jt>=0?(cols[jt]||'').trim():'';
-    if(first||last||linkedin||company){
-      leads.push({id:++idc,status:'idle',firstName:first,lastName:last,linkedinUrl:linkedin,companyUrl:company,jobTitle:job,user:ownerPickVal});n++;
-    }
+    if(first||last||linkedin||company){leads.push({id:++idc,status:'idle',firstName:first,lastName:last,linkedinUrl:linkedin,companyUrl:company,jobTitle:job,user:ownerPickVal});n++;}
   });
   document.getElementById('modal-map').classList.remove('open');resetCsvZone();
   render();toast(n+' lead'+(n!==1?'s':'')+' imported','success');
 }
 
-// IMPORT CONFIG MODAL
-function syncConfigUI(){
-  ['phone','persona','avail'].forEach(k=>{
-    const key={phone:'enrichPhone',persona:'personaMatch',avail:'availableOnly'}[k];
-    const row=document.getElementById('opt-'+k);
-    const chk=document.getElementById('chk-'+k);
-    const checked=importConfig[key];
-    row.classList.toggle('opt-checked',checked);
-    chk.textContent=checked?'✓':'';
-  });
-  // sub-rules visibility
-  const sr=document.getElementById('sub-rules-avail');
-  if(sr)sr.style.display=importConfig.availableOnly?'block':'none';
+// MULTI-STEP CONFIG MODAL
+function openCfgModal(){
+  cfgStep=1;
+  // Reset toggles to match current cfg
+  syncToggles();
+  renderCfgStep(1,false);
+  document.getElementById('modal-cfg').classList.add('open');
 }
-function toggleOpt(rowId,configKey){
-  importConfig[configKey]=!importConfig[configKey];
-  syncConfigUI();
+function closeCfg(){document.getElementById('modal-cfg').classList.remove('open');}
+
+function syncToggles(){
+  setToggle('tog-persona',cfg.personaMatch);
+  setToggle('tog-phone',cfg.enrichPhone);
+  setToggle('tog-avail',cfg.availableOnly);
+  updateFilterRulesVis();
 }
-function openConfigModal(){
-  syncConfigUI();
-  document.getElementById('modal-config').classList.add('open');
+function setToggle(id,on){
+  const row=document.getElementById(id);
+  if(on)row.classList.add('on');else row.classList.remove('on');
 }
-function closeConfig(){document.getElementById('modal-config').classList.remove('open');}
-function confirmConfig(){
-  closeConfig();
-  // Proceed to confirm/send
-  openConfirmModal();
+function toggleCfg(key,rowId){
+  cfg[key]=!cfg[key];
+  setToggle(rowId,cfg[key]);
+}
+function toggleCfgAvail(){
+  cfg.availableOnly=!cfg.availableOnly;
+  setToggle('tog-avail',cfg.availableOnly);
+  updateFilterRulesVis();
+}
+function updateFilterRulesVis(){
+  const fr=document.getElementById('filter-rules');
+  if(fr)fr.style.opacity=cfg.availableOnly?'1':'0.3';
 }
 
-// CONFIRM MODAL
-function openConfirmModal(){
-  const v=leads.filter(isValid).length;
-  const opts=[];
-  if(importConfig.personaMatch)opts.push('Persona Match');
-  opts.push('Enrich email address');
-  if(importConfig.enrichPhone)opts.push('Enrich phone number');
-  opts.push('Link contact to company in CRM');
-  if(importConfig.availableOnly)opts.push('Available contacts only');
-
-  document.getElementById('confirm-details').innerHTML=`
-    <div><strong>Import:</strong> ${esc(importName)}</div>
-    <div><strong>Created by:</strong> ${esc(importedBy)}</div>
-    <div><strong>Leads to send:</strong> ${v}</div>
-    <div><strong>Options:</strong> ${opts.map(o=>`<span style="display:inline-block;background:rgba(255,122,89,.1);color:var(--a);border-radius:5px;padding:1px 7px;font-size:11px;margin:2px 2px 0 0">${esc(o)}</span>`).join('')}</div>`;
-  document.getElementById('modal-confirm').classList.add('open');
+function goStep(n,dir){
+  const panels=document.querySelectorAll('.cfg-panel');
+  panels.forEach(p=>p.classList.remove('active','back'));
+  const next=document.getElementById('cfg-panel-'+n);
+  if(dir==='back')next.classList.add('cfg-panel','back');
+  next.classList.add('active');
+  cfgStep=n;
+  updateStepDots(n);
+  if(n===4)buildReview();
 }
-function closeConfirm(){document.getElementById('modal-confirm').classList.remove('open');}
+function updateStepDots(current){
+  for(let i=1;i<=4;i++){
+    const dot=document.getElementById('sdot-'+i);
+    const num=document.getElementById('sdot-n'+i);
+    dot.classList.remove('active','done');
+    if(i<current){dot.classList.add('done');num.textContent='✓';}
+    else if(i===current){dot.classList.add('active');num.textContent=i;}
+    else{num.textContent=i;}
+  }
+}
+function renderCfgStep(n){
+  document.querySelectorAll('.cfg-panel').forEach(p=>p.classList.remove('active','back'));
+  document.getElementById('cfg-panel-'+n).classList.add('active');
+  updateStepDots(n);
+}
+function buildReview(){
+  const yn=(v,onLabel='Yes',offLabel='No')=>v
+    ?`<span class="review-val on">✓ ${onLabel}</span>`
+    :`<span class="review-val off">— ${offLabel}</span>`;
+  document.getElementById('rv-persona').outerHTML=yn(cfg.personaMatch,'Enabled','Disabled');
+  document.getElementById('rv-phone').outerHTML=yn(cfg.enrichPhone,'Enabled','Disabled');
+  document.getElementById('rv-avail').outerHTML=yn(cfg.availableOnly,'Active','Inactive');
+  // Re-query after outerHTML replacement
+  document.querySelector('#cfg-panel-4 .review-section').innerHTML=`
+    <div class="review-section-title">Configuration</div>
+    <div class="review-row"><span class="review-label">Persona Match</span>${yn(cfg.personaMatch,'Enabled','Disabled')}</div>
+    <div class="review-row"><span class="review-label">Enrich phone number</span>${yn(cfg.enrichPhone,'Enabled','Disabled')}</div>
+    <div class="review-row"><span class="review-label">Available contacts only</span>${yn(cfg.availableOnly,'Active','Inactive')}</div>`;
+  document.getElementById('rv-filters-block').style.display=cfg.availableOnly?'block':'none';
+}
+function confirmCfg(){
+  closeCfg();
+  runImport();
+}
 
-// SEND — point of no return, per-import lock
-function confirmSend(){
-  closeConfirm();
-  const snapshot=[...leads],name=importName,by=importedBy,cfg={...importConfig};
+// SEND
+function runImport(){
+  const snapshot=[...leads],name=importName,by=importedBy,c={...cfg};
   const jobId=Date.now()+'_'+Math.random().toString(36).slice(2,7);
   document.getElementById('view-import').classList.remove('active');
   document.getElementById('view-home').classList.add('active');
   leads=[];idc=0;
   activeJobs.push({id:jobId,name,by});
   renderHome();
-  runSend(snapshot,name,by,cfg,jobId);
+  runSend(snapshot,name,by,c,jobId);
 }
-
-async function runSend(snapshot,name,by,cfg,jobId){
+async function runSend(snapshot,name,by,c,jobId){
   const results=[];
   for(const lead of snapshot){
     const owner=USERS.find(u=>u.name===lead.user);
     const payload={
-      // Import metadata
-      importName:name,
-      importedBy:by,
-      // Contact data
-      firstName:lead.firstName,
-      lastName:lead.lastName,
-      linkedinUrl:lead.linkedinUrl,
-      companyLinkedinUrl:lead.companyUrl,
+      importName:name,importedBy:by,
+      firstName:lead.firstName,lastName:lead.lastName,
+      linkedinUrl:lead.linkedinUrl,companyLinkedinUrl:lead.companyUrl,
       jobTitle:lead.jobTitle||'',
-      // HubSpot owner
-      ownerName:lead.user,
-      ownerId:owner?owner.id:null,
-      // Import configuration — all options sent as flat booleans + human-readable summary
-      enrichEmail:true,
-      enrichPhone:cfg.enrichPhone,
-      personaMatch:cfg.personaMatch,
-      linkToCompany:true,
-      availableOnly:cfg.availableOnly,
-      // Filtering sub-rules (active when availableOnly=true)
-      filter_notClientCompany:cfg.availableOnly,
-      filter_notPartnership:cfg.availableOnly,
-      filter_noOpenDeals:cfg.availableOnly,
-      filter_notWorkedByBDR:cfg.availableOnly,
-      // Human-readable config summary
+      ownerName:lead.user,ownerId:owner?owner.id:null,
+      enrichEmail:true,enrichPhone:c.enrichPhone,
+      personaMatch:c.personaMatch,linkToCompany:true,
+      availableOnly:c.availableOnly,
+      filter_notClientCompany:c.availableOnly,
+      filter_notPartnership:c.availableOnly,
+      filter_noOpenDeals:c.availableOnly,
+      filter_notWorkedByBDR:c.availableOnly,
       configSummary:[
         'Enrich email address',
-        ...(cfg.enrichPhone?['Enrich phone number']:[]),
-        ...(cfg.personaMatch?['Persona Match (ICP check)']:[]),
+        ...(c.enrichPhone?['Enrich phone number']:[]),
+        ...(c.personaMatch?['Persona Match (ICP check)']:[]),
         'Link contact to company in CRM',
-        ...(cfg.availableOnly?['Available contacts only (not client / not partnership / no open deals / not worked by BDR)']:[]),
+        ...(c.availableOnly?['Available contacts only']:[]),
       ].join(' | ')
     };
     try{
@@ -969,13 +1010,13 @@ async function runSend(snapshot,name,by,cfg,jobId){
   const ok=results.filter(r=>r.status==='sent').length;
   const err=results.filter(r=>r.status==='error').length;
   hist.unshift({id:Date.now(),name,importedBy:by,date:new Date().toLocaleString('en-GB'),total:results.length,ok,err,leads:results});
-  try{localStorage.setItem('hs_v10',JSON.stringify(hist));}catch{}
+  try{localStorage.setItem('hs_v11',JSON.stringify(hist));}catch{}
   activeJobs=activeJobs.filter(j=>j.id!==jobId);
   renderHome();
   toast(err===0?`✅ "${name}" — ${ok} lead${ok!==1?'s':''} sent!`:`"${name}" — ${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
 }
 
-// TABLE CUSTOM SELECT
+// TABLE SELECT
 let openTsel=null;
 function closeTsel(){
   if(openTsel){document.getElementById('tdd-'+openTsel)?.remove();document.getElementById('ttr-'+openTsel)?.classList.remove('open');openTsel=null;}
@@ -1007,13 +1048,8 @@ function removeRow(id){leads=leads.filter(l=>l.id!==id);render();}
 function clearAll(){if(!leads.length||!confirm('Clear all leads?'))return;leads=[];render();}
 function isValid(l){return l.firstName.trim()&&l.lastName.trim()&&l.linkedinUrl.trim()&&l.companyUrl.trim()&&l.user.trim();}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
-function onInput(id,f,el){const l=leads.find(l=>l.id===id);if(!l)return;l[f]=el.value;if(l._t)el.classList.toggle('inv',!el.value.trim()&&f!=='jobTitle');footer();btn();}
-function onBlur(id,f,el){
-  const l=leads.find(l=>l.id===id);if(!l)return;
-  l._t=true;l[f]=el.value.trim();el.value=l[f];
-  if(f!=='jobTitle')el.classList.toggle('inv',!l[f]);
-  footer();btn();
-}
+function onInput(id,f,el){const l=leads.find(l=>l.id===id);if(!l)return;l[f]=el.value;if(l._t&&f!=='jobTitle')el.classList.toggle('inv',!el.value.trim());footer();btn();}
+function onBlur(id,f,el){const l=leads.find(l=>l.id===id);if(!l)return;l._t=true;l[f]=el.value.trim();el.value=l[f];if(f!=='jobTitle')el.classList.toggle('inv',!l[f]);footer();btn();}
 function render(){
   const body=document.getElementById('leads-body');
   document.getElementById('empty-state').style.display=leads.length?'none':'block';
@@ -1062,9 +1098,7 @@ function renderHome(){
   document.getElementById('hist-empty').style.display=hist.length?'none':'block';
   document.getElementById('inprogress-list').innerHTML=activeJobs.map(j=>`
     <div class="ip-card">
-      <div class="ip-spinner">
-        <svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="14"/><circle class="arc" cx="17" cy="17" r="14" stroke-dashoffset="22"/></svg>
-      </div>
+      <div class="ip-spinner"><svg viewBox="0 0 34 34"><circle cx="17" cy="17" r="14"/><circle class="arc" cx="17" cy="17" r="14" stroke-dashoffset="22"/></svg></div>
       <div class="ip-body">
         <div class="ip-badge">Import in progress</div>
         <div class="ip-name">${esc(j.name)}</div>
@@ -1091,12 +1125,11 @@ function renderHome(){
         <table class="btbl">
           <thead><tr><th>First</th><th>Last</th><th>LinkedIn</th><th>Company</th><th>Job Title</th><th>Owner</th><th>Status</th></tr></thead>
           <tbody>${b.leads.map(l=>`<tr>
-            <td>${esc(l.firstName||'')}</td>
-            <td>${esc(l.lastName||'')}</td>
+            <td>${esc(l.firstName||'')}</td><td>${esc(l.lastName||'')}</td>
             <td title="${esc(l.linkedinUrl)}">${esc(l.linkedinUrl)}</td>
             <td title="${esc(l.companyLinkedinUrl)}">${esc(l.companyLinkedinUrl)}</td>
             <td>${esc(l.jobTitle||'—')}</td>
-            <td>${esc(l.ownerName||l.user||'')}</td>
+            <td>${esc(l.ownerName||'')}</td>
             <td class="${l.status==='sent'?'s-ok':'s-err'}">${l.status==='sent'?'✅ Sent':'❌ Error'}</td>
           </tr>`).join('')}</tbody>
         </table>
