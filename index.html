@@ -5,147 +5,257 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leads Manager → HubSpot</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f0f13;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column}
-  header{background:#1a1a24;border-bottom:1px solid #2d2d3d;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
-  header h1{font-size:18px;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px}
-  header h1 span{background:linear-gradient(135deg,#ff7a59,#ff5c35);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .badge{background:#ff7a59;color:#fff;font-size:11px;padding:2px 8px;border-radius:999px;font-weight:600;-webkit-text-fill-color:#fff}
-  .tabs{display:flex;padding:0 24px;background:#15151f;border-bottom:1px solid #2d2d3d}
-  .tab{padding:12px 18px;font-size:13px;font-weight:600;cursor:pointer;color:#64748b;border-bottom:2px solid transparent;transition:all .2s}
-  .tab:hover{color:#e2e8f0}
-  .tab.active{color:#ffb59a;border-bottom-color:#ff7a59}
-  .view{display:none;flex:1;flex-direction:column}
-  .view.active{display:flex}
-  .toolbar{display:flex;align-items:center;gap:10px;padding:14px 24px;background:#15151f;border-bottom:1px solid #2d2d3d;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;white-space:nowrap}
-  .btn-ghost{background:#1e1e2e;color:#94a3b8;border:1px solid #3d3d5c}
-  .btn-ghost:hover{background:#2a2a3e;color:#e2e8f0;border-color:#ff7a59}
-  .btn-primary{background:linear-gradient(135deg,#ff7a59,#ff5c35);color:#fff}
-  .btn-primary:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 4px 15px rgba(255,122,89,.4)}
-  .btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-  .btn-danger{background:#1e1e2e;color:#f87171;border:1px solid #3d3d5c}
-  .btn-danger:hover{background:#2a1a1a;border-color:#f87171}
-  .table-wrap{overflow-x:auto;padding:0 24px 16px;margin-top:16px;flex:1}
-  table{width:100%;border-collapse:collapse;min-width:600px}
-  thead tr{background:#1a1a24}
-  th{padding:10px 12px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;border-bottom:1px solid #2d2d3d;white-space:nowrap}
-  th.req::after{content:' *';color:#f87171}
-  tbody tr{border-bottom:1px solid #1e1e2e;transition:background .15s}
-  tbody tr:hover{background:#1a1a28}
-  tbody tr.row-ok{background:#0d1f16;border-left:3px solid #34d399}
-  tbody tr.row-err{background:#1f1010;border-left:3px solid #f87171}
-  td{padding:6px 8px;vertical-align:middle}
-  td.num{color:#4a4a6a;font-size:12px;text-align:center;width:36px}
-  .ci{width:100%;background:transparent;border:1px solid transparent;border-radius:6px;padding:6px 8px;color:#e2e8f0;font-size:13px;outline:none;transition:all .15s}
-  .ci:hover{border-color:#3d3d5c;background:#1e1e2e}
-  .ci:focus{border-color:#ff7a59;background:#1e1e2e}
-  .ci.inv{border-color:#f87171!important;background:#1f1010!important}
-  .ci::placeholder{color:#3d3d5c}
-  .cs{width:100%;background:#1e1e2e;border:1px solid transparent;border-radius:6px;padding:6px 8px;color:#e2e8f0;font-size:13px;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:28px}
-  .cs:hover{border-color:#3d3d5c}
-  .cs:focus{border-color:#ff7a59}
-  .cs.inv{border-color:#f87171!important}
-  .cs option{background:#1e1e2e;color:#e2e8f0}
-  td.sc{width:36px;text-align:center;font-size:16px}
-  td.ac{width:40px;text-align:center}
-  .db{background:none;border:none;cursor:pointer;color:#4a4a6a;font-size:16px;padding:4px 8px;border-radius:6px;transition:all .15s;line-height:1}
-  .db:hover{color:#f87171;background:#2a1a1a}
-  .footer-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:#15151f;border-top:1px solid #2d2d3d;font-size:12px;color:#64748b;flex-wrap:wrap;gap:8px}
-  .pb{height:3px;background:#1e1e2e}
-  .pf{height:100%;background:linear-gradient(90deg,#ff7a59,#ff5c35);width:0%;transition:width .3s}
-  .empty{text-align:center;padding:48px 24px;color:#4a4a6a}
-  .empty p{font-size:14px;margin-top:8px}
-  #csv-input{display:none}
-  .hw{padding:24px;flex:1;overflow-y:auto}
-  .hh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-  .hh h2{font-size:15px;font-weight:700}
-  .he{text-align:center;padding:48px 24px;color:#4a4a6a}
-  .he p{font-size:14px;margin-top:8px}
-  .batch{background:#1a1a24;border:1px solid #2d2d3d;border-radius:12px;margin-bottom:12px;overflow:hidden}
-  .bh{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;transition:background .15s}
-  .bh:hover{background:#1e1e2e}
-  .bd-date{font-size:12px;color:#64748b;margin-top:2px}
-  .bt{font-size:13px;font-weight:600;flex:1}
-  .bs{display:flex;gap:8px}
-  .sp{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px}
-  .sp-ok{background:#064e3b;color:#34d399}
-  .sp-err{background:#450a0a;color:#f87171}
-  .sp-tot{background:#1e1e3e;color:#a5b4fc}
-  .bc{color:#4a4a6a;font-size:12px;transition:transform .2s}
-  .batch.open .bc{transform:rotate(90deg)}
-  .bb{display:none;border-top:1px solid #2d2d3d}
-  .batch.open .bb{display:block}
-  .bt2{width:100%;border-collapse:collapse;font-size:12px}
-  .bt2 th{padding:8px 14px;text-align:left;color:#64748b;font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.05em;border-bottom:1px solid #2d2d3d}
-  .bt2 td{padding:8px 14px;border-bottom:1px solid #1e1e2e;color:#94a3b8}
-  .bt2 tr:last-child td{border-bottom:none}
-  .s-ok{color:#34d399!important}
-  .s-err{color:#f87171!important}
-  .tw{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:999}
-  .toast{padding:12px 18px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.5);animation:si .3s ease;max-width:320px}
-  .toast.success{background:#064e3b;color:#34d399;border:1px solid #065f46}
-  .toast.error{background:#450a0a;color:#f87171;border:1px solid #7f1d1d}
-  .toast.info{background:#1e1e3e;color:#a5b4fc;border:1px solid #3730a3}
-  @keyframes si{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#09090f;color:#e2e8f0;min-height:100vh;overflow-x:hidden}
+
+/* ── BACKGROUND ── */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-grad{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;transition:transform 1.2s cubic-bezier(.22,1,.36,1)}
+.bg-grad-1{width:600px;height:600px;background:radial-gradient(circle,#ff7a59,transparent 70%);top:-100px;left:-100px}
+.bg-grad-2{width:500px;height:500px;background:radial-gradient(circle,#6366f1,transparent 70%);bottom:-100px;right:-100px}
+.bg-grad-3{width:400px;height:400px;background:radial-gradient(circle,#f59e0b,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px}
+
+/* ── LAYOUT ── */
+.app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+
+/* ── HEADER ── */
+header{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);backdrop-filter:blur(12px);background:rgba(9,9,15,.7)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,#ff7a59,#ff5c35);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 15px rgba(255,122,89,.4)}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.logo-text span{background:linear-gradient(135deg,#ff7a59,#ff5c35);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-actions{display:flex;align-items:center;gap:10px}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;white-space:nowrap;letter-spacing:-.1px}
+.btn-primary{background:linear-gradient(135deg,#ff7a59,#ff5c35);color:#fff;box-shadow:0 4px 15px rgba(255,122,89,.3)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,122,89,.5)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:rgba(255,255,255,.06);color:#94a3b8;border:1px solid rgba(255,255,255,.1)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);color:#e2e8f0;border-color:rgba(255,122,89,.4)}
+.btn-danger{background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2)}
+.btn-danger:hover{background:rgba(248,113,113,.2)}
+.btn-sm{padding:6px 12px;font-size:12px}
+
+/* ── VIEWS ── */
+.view{display:none;flex:1;flex-direction:column}
+.view.active{display:flex}
+
+/* ══════════════════════════════════
+   HOME VIEW
+══════════════════════════════════ */
+.home{padding:48px 32px;flex:1}
+.home-hero{text-align:center;margin-bottom:56px}
+.home-hero h2{font-size:36px;font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:12px}
+.home-hero h2 span{background:linear-gradient(135deg,#ff7a59,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.home-hero p{color:#64748b;font-size:15px;max-width:400px;margin:0 auto 28px}
+.new-import-btn{font-size:15px;padding:12px 28px;border-radius:12px}
+
+.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:600px;margin:0 auto 56px}
+.stat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 24px;text-align:center;transition:all .3s}
+.stat-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,122,89,.3);transform:translateY(-2px)}
+.stat-num{font-size:28px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#ff7a59,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:12px;color:#64748b;margin-top:4px;font-weight:500}
+
+.history-section h3{font-size:16px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.history-section h3 span{background:rgba(255,122,89,.15);color:#ff7a59;font-size:11px;padding:2px 8px;border-radius:999px;font-weight:600}
+
+.history-empty{text-align:center;padding:60px 24px;color:#4a4a6a;background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.08);border-radius:16px}
+.history-empty .icon{font-size:40px;margin-bottom:12px}
+.history-empty p{font-size:14px}
+
+.batch-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:all .2s;cursor:pointer}
+.batch-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,122,89,.25);transform:translateY(-1px)}
+.batch-card-header{display:flex;align-items:center;gap:16px;padding:16px 20px}
+.batch-card-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#ff7a59,#ff5c35);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.batch-card-info{flex:1;min-width:0}
+.batch-card-name{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.batch-card-date{font-size:12px;color:#64748b;margin-top:2px}
+.batch-pills{display:flex;gap:6px;flex-shrink:0}
+.pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px}
+.pill-total{background:rgba(99,102,241,.15);color:#a5b4fc}
+.pill-ok{background:rgba(52,211,153,.12);color:#34d399}
+.pill-err{background:rgba(248,113,113,.12);color:#f87171}
+.batch-chevron{color:#4a4a6a;font-size:11px;transition:transform .2s;flex-shrink:0}
+.batch-card.open .batch-chevron{transform:rotate(90deg)}
+.batch-body{display:none;border-top:1px solid rgba(255,255,255,.06)}
+.batch-card.open .batch-body{display:block}
+.batch-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.batch-tbl th{padding:8px 20px;text-align:left;color:#64748b;font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.05em;border-bottom:1px solid rgba(255,255,255,.06)}
+.batch-tbl td{padding:8px 20px;border-bottom:1px solid rgba(255,255,255,.04);color:#94a3b8;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.batch-tbl tr:last-child td{border-bottom:none}
+.s-ok{color:#34d399!important}
+.s-err{color:#f87171!important}
+
+/* ══════════════════════════════════
+   MODAL — NEW IMPORT
+══════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#13131f;border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:36px;width:100%;max-width:440px;box-shadow:0 25px 60px rgba(0,0,0,.6);animation:modalIn .25s cubic-bezier(.34,1.56,.64,1)}
+@keyframes modalIn{from{transform:scale(.9) translateY(20px);opacity:0}to{transform:none;opacity:1}}
+.modal h3{font-size:20px;font-weight:800;margin-bottom:6px}
+.modal p{color:#64748b;font-size:14px;margin-bottom:24px}
+.modal-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 16px;color:#e2e8f0;font-size:14px;outline:none;transition:all .2s}
+.modal-input:focus{border-color:#ff7a59;background:rgba(255,122,89,.08)}
+.modal-input::placeholder{color:#4a4a6a}
+.modal-actions{display:flex;gap:10px;margin-top:20px}
+.modal-actions .btn{flex:1;justify-content:center}
+
+/* ══════════════════════════════════
+   IMPORT VIEW
+══════════════════════════════════ */
+.import-view-header{display:flex;align-items:center;gap:16px;padding:16px 32px;border-bottom:1px solid rgba(255,255,255,.06);backdrop-filter:blur(12px);background:rgba(9,9,15,.7)}
+.back-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#94a3b8;font-size:16px;transition:all .2s;flex-shrink:0}
+.back-btn:hover{background:rgba(255,255,255,.12);color:#e2e8f0}
+.import-title{font-size:16px;font-weight:700;flex:1}
+.import-subtitle{font-size:12px;color:#64748b;margin-top:1px}
+
+.toolbar{display:flex;align-items:center;gap:10px;padding:14px 32px;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap}
+#csv-input{display:none}
+
+.table-wrap{overflow-x:auto;padding:24px 32px;flex:1}
+table{width:100%;border-collapse:collapse;min-width:600px}
+thead tr{background:rgba(255,255,255,.03)}
+th{padding:10px 14px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748b;border-bottom:1px solid rgba(255,255,255,.06);white-space:nowrap}
+th.req::after{content:' *';color:#f87171}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s}
+tbody tr:hover{background:rgba(255,255,255,.03)}
+tbody tr.row-ok{background:rgba(52,211,153,.05);border-left:3px solid #34d399}
+tbody tr.row-err{background:rgba(248,113,113,.05);border-left:3px solid #f87171}
+td{padding:6px 8px;vertical-align:middle}
+td.num{color:#4a4a6a;font-size:12px;text-align:center;width:36px}
+.ci{width:100%;background:transparent;border:1px solid transparent;border-radius:8px;padding:7px 10px;color:#e2e8f0;font-size:13px;outline:none;transition:all .15s}
+.ci:hover{border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+.ci:focus{border-color:#ff7a59;background:rgba(255,122,89,.06)}
+.ci.inv{border-color:#f87171!important;background:rgba(248,113,113,.08)!important}
+.ci::placeholder{color:#3d3d5c}
+.cs{width:100%;background:rgba(255,255,255,.06);border:1px solid transparent;border-radius:8px;padding:7px 10px;color:#e2e8f0;font-size:13px;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:28px}
+.cs:focus{border-color:#ff7a59}
+.cs.inv{border-color:#f87171!important}
+.cs option{background:#13131f;color:#e2e8f0}
+td.sc{width:36px;text-align:center;font-size:16px}
+td.ac{width:40px;text-align:center}
+.db{background:none;border:none;cursor:pointer;color:#4a4a6a;font-size:15px;padding:4px 8px;border-radius:6px;transition:all .15s;line-height:1}
+.db:hover{color:#f87171;background:rgba(248,113,113,.1)}
+
+.footer-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 32px;background:rgba(9,9,15,.8);border-top:1px solid rgba(255,255,255,.06);font-size:12px;color:#64748b;flex-wrap:wrap;gap:8px}
+.pb{height:2px;background:rgba(255,255,255,.06)}
+.pf{height:100%;background:linear-gradient(90deg,#ff7a59,#f59e0b);width:0%;transition:width .3s}
+
+.empty-state{text-align:center;padding:60px 24px;color:#4a4a6a}
+.empty-state p{font-size:14px;margin-top:8px}
+
+/* ── TOAST ── */
+.tw{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:999}
+.toast{padding:12px 18px;border-radius:12px;font-size:13px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.5);animation:toastIn .3s cubic-bezier(.34,1.56,.64,1);max-width:320px;backdrop-filter:blur(12px)}
+.toast.success{background:rgba(6,78,59,.9);color:#34d399;border:1px solid rgba(52,211,153,.2)}
+.toast.error{background:rgba(69,10,10,.9);color:#f87171;border:1px solid rgba(248,113,113,.2)}
+.toast.info{background:rgba(30,30,62,.9);color:#a5b4fc;border:1px solid rgba(99,102,241,.2)}
+@keyframes toastIn{from{transform:translateX(40px) scale(.9);opacity:0}to{transform:none;opacity:1}}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>🗂 Leads Manager <span>→ HubSpot</span></h1>
-  <span class="badge" id="count-badge">0 leads</span>
-</header>
-
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('leads')">📋 Leads</div>
-  <div class="tab" onclick="switchTab('history')" id="htab">🕓 History</div>
+<div class="bg">
+  <div class="bg-grid"></div>
+  <div class="bg-grad bg-grad-1" id="g1"></div>
+  <div class="bg-grad bg-grad-2" id="g2"></div>
+  <div class="bg-grad bg-grad-3" id="g3"></div>
 </div>
 
-<div class="view active" id="view-leads">
-  <div class="toolbar">
-    <button class="btn btn-ghost" onclick="addRow()">＋ Add row</button>
-    <button class="btn btn-ghost" onclick="document.getElementById('csv-input').click()">📂 Import CSV</button>
-    <input type="file" id="csv-input" accept=".csv" onchange="importCSV(event)">
-    <button class="btn btn-danger" onclick="clearAll()">🗑 Clear all</button>
-    <button class="btn btn-primary" id="send-btn" onclick="sendToHubspot()" disabled>🚀 Send to HubSpot</button>
-  </div>
-  <div class="pb"><div class="pf" id="progress"></div></div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th style="width:36px">#</th>
-          <th class="req">LinkedIn Profile URL</th>
-          <th class="req">LinkedIn Company URL</th>
-          <th class="req">Assignee</th>
-          <th style="width:36px"></th>
-          <th style="width:40px"></th>
-        </tr>
-      </thead>
-      <tbody id="leads-body"></tbody>
-    </table>
-    <div class="empty" id="empty-state">
-      <div style="font-size:40px">📋</div>
-      <p>No leads yet. Add a row or import a CSV file.</p>
+<div class="app">
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🗂</div>
+      <div class="logo-text">Leads Manager <span>→ HubSpot</span></div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-primary new-import-btn" onclick="openNewImportModal()">＋ New Import</button>
+    </div>
+  </header>
+
+  <!-- HOME VIEW -->
+  <div class="view active" id="view-home">
+    <div class="home">
+      <div class="home-hero">
+        <h2>Import leads into<br><span>HubSpot</span> effortlessly</h2>
+        <p>Add leads manually or import from CSV, then send them straight to HubSpot in one click.</p>
+        <button class="btn btn-primary new-import-btn" onclick="openNewImportModal()">＋ Start a new import</button>
+      </div>
+      <div class="home-stats" id="home-stats">
+        <div class="stat-card"><div class="stat-num" id="stat-imports">0</div><div class="stat-label">Total imports</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-leads">0</div><div class="stat-label">Leads sent</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-errors">0</div><div class="stat-label">Errors</div></div>
+      </div>
+      <div class="history-section">
+        <h3>Import history <span id="hist-count">0</span></h3>
+        <div id="history-list"></div>
+        <div class="history-empty" id="history-empty">
+          <div class="icon">📭</div>
+          <p>No imports yet. Start your first import above.</p>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="footer-bar">
-    <span id="footer-info">0 leads · 0 valid · 0 incomplete</span>
-    <span>Required: LinkedIn Profile URL, LinkedIn Company URL, Assignee</span>
+
+  <!-- IMPORT VIEW -->
+  <div class="view" id="view-import">
+    <div class="import-view-header">
+      <div class="back-btn" onclick="goHome()">←</div>
+      <div>
+        <div class="import-title" id="import-title">Import</div>
+        <div class="import-subtitle" id="import-subtitle">0 leads · 0 valid</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-left:auto">
+        <button class="btn btn-ghost btn-sm" onclick="document.getElementById('csv-input').click()">📂 Import CSV</button>
+        <input type="file" id="csv-input" accept=".csv" onchange="importCSV(event)">
+        <button class="btn btn-ghost btn-sm" onclick="addRow()">＋ Add row</button>
+        <button class="btn btn-danger btn-sm" onclick="clearAll()">🗑</button>
+        <button class="btn btn-primary" id="send-btn" onclick="sendToHubspot()" disabled>🚀 Send to HubSpot</button>
+      </div>
+    </div>
+    <div class="pb"><div class="pf" id="progress"></div></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:36px">#</th>
+            <th class="req">LinkedIn Profile URL</th>
+            <th class="req">LinkedIn Company URL</th>
+            <th class="req">Assignee</th>
+            <th style="width:36px"></th>
+            <th style="width:40px"></th>
+          </tr>
+        </thead>
+        <tbody id="leads-body"></tbody>
+      </table>
+      <div class="empty-state" id="empty-state">
+        <div style="font-size:40px">📋</div>
+        <p>No leads yet. Add a row or import a CSV file.</p>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span id="footer-info">0 leads · 0 valid · 0 incomplete</span>
+      <span>Required: LinkedIn Profile URL · LinkedIn Company URL · Assignee</span>
+    </div>
   </div>
 </div>
 
-<div class="view" id="view-history">
-  <div class="hw">
-    <div class="hh">
-      <h2>Send History</h2>
-      <button class="btn btn-danger" onclick="clearHistory()">🗑 Clear history</button>
-    </div>
-    <div id="history-list"></div>
-    <div class="he" id="history-empty">
-      <div style="font-size:40px">🕓</div>
-      <p>No sends yet.</p>
+<!-- NEW IMPORT MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>🗂 New Import</h3>
+    <p>Give your import a name and select who's creating it.</p>
+    <input class="modal-input" id="import-name-input" type="text" placeholder="e.g. SaaS Prospects Q2, Event Berlin..." maxlength="60"
+      onkeydown="if(event.key==='Enter') confirmNewImport()" style="margin-bottom:12px"/>
+    <select class="modal-input" id="import-user-input" style="cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px">
+      <option value="">-- Who is importing? --</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmNewImport()">Create import →</button>
     </div>
   </div>
 </div>
@@ -153,31 +263,69 @@
 <div class="tw" id="toast-wrap"></div>
 
 <script>
-const WEBHOOK = 'https://api.clay.com/v3/sources/webhook/pull-in-data-from-a-webhook-be430a93-c9a6-4222-832b-fff68466e1ee';
-const USERS = ["Gwenn JAMBOU","Nolwenn André","Victoria Hanne","Maxence Jaubert","Jacopo Carretta","Aurélie Pureur","Noémie de Montmarin","Fanny Maynadie","Valentin Burr","Team IT","Sara Poretta","Marie Tiberghien","Imane Omri","Pauline NUGUES","Emeline Wulstecke","Justine Gager","Eléonore Guillemot","Kevin Rignault","Colm O'Brien","Clara Facchetti","Becca Guinchard","Duncan Perret","Laura POUDEVIGNE","Chakir SMIRES","Sofia Taleb Benjelloun","Dylan Pujol","Sacha Ghanem","Capucine LEVY","Mélina LE MIGNON","Emmanuelle Sillé","François Lehec","Karla Rousselet","Clément ATTOU","Evana Le Puil","Maxime BOUCHER","Lolita Soligny","Max HANCE","Julien Hirtzig","Camille Brun","Vianney Mathorel","Marie Tavenier","Florian Donet","David BERNARD","Mélanie Chauvin","Margot Pourailly","Emeric Kubiak","Aurore Lefebvre","Paul Stout","Noémie GRILLOT","Charly Arnaud","Jeanne DARBIN","Wendy BECHET","Lauren Tait","Alessandro De Valerio","Luciano Cipolla","Alexandre Collignon","FANNY POURCINE","Simon Baron","Christopher ROUSSEL","Charlie VEREAU","Tales MARRA","Marine Degruson","Elodie PINHEIRA","Julie BABEAU","ROMAIN TIRUEL","Aisha Roukhamieh-Mckinna","Svetlana Pashina","Laura Weerawardana","Christophe HOAREAU","Yohan LE CLECH","Mathieu Parisot","Arthur BEQUIN","Valentin Beaudon","Jules Jatteau","Siril Maurice","Antoine GOEHRS","Rebecca COTTIGNIES","Arthur DAVIES","Quentin CERVELLE","Emmanuelle Cortes","JB Comte"];
+const WEBHOOK='https://api.clay.com/v3/sources/webhook/pull-in-data-from-a-webhook-be430a93-c9a6-4222-832b-fff68466e1ee';
+const BYPASS='HQ5JV0qhkuqeoAAcOy1vaNIWgxac1dRn';
+const USERS=["Gwenn JAMBOU","Nolwenn André","Victoria Hanne","Maxence Jaubert","Jacopo Carretta","Aurélie Pureur","Noémie de Montmarin","Fanny Maynadie","Valentin Burr","Team IT","Sara Poretta","Marie Tiberghien","Imane Omri","Pauline NUGUES","Emeline Wulstecke","Justine Gager","Eléonore Guillemot","Kevin Rignault","Colm O'Brien","Clara Facchetti","Becca Guinchard","Duncan Perret","Laura POUDEVIGNE","Chakir SMIRES","Sofia Taleb Benjelloun","Dylan Pujol","Sacha Ghanem","Capucine LEVY","Mélina LE MIGNON","Emmanuelle Sillé","François Lehec","Karla Rousselet","Clément ATTOU","Evana Le Puil","Maxime BOUCHER","Lolita Soligny","Max HANCE","Julien Hirtzig","Camille Brun","Vianney Mathorel","Marie Tavenier","Florian Donet","David BERNARD","Mélanie Chauvin","Margot Pourailly","Emeric Kubiak","Aurore Lefebvre","Paul Stout","Noémie GRILLOT","Charly Arnaud","Jeanne DARBIN","Wendy BECHET","Lauren Tait","Alessandro De Valerio","Luciano Cipolla","Alexandre Collignon","FANNY POURCINE","Simon Baron","Christopher ROUSSEL","Charlie VEREAU","Tales MARRA","Marine Degruson","Elodie PINHEIRA","Julie BABEAU","ROMAIN TIRUEL","Aisha Roukhamieh-Mckinna","Svetlana Pashina","Laura Weerawardana","Christophe HOAREAU","Yohan LE CLECH","Mathieu Parisot","Arthur BEQUIN","Valentin Beaudon","Jules Jatteau","Siril Maurice","Antoine GOEHRS","Rebecca COTTIGNIES","Arthur DAVIES","Quentin CERVELLE","Emmanuelle Cortes","JB Comte"];
 
-let leads=[], idc=0, hist=[];
-try{hist=JSON.parse(localStorage.getItem('hs_hist')||'[]');}catch{}
+let leads=[],idc=0,importName='',importedBy='',hist=[];
+try{hist=JSON.parse(localStorage.getItem('hs_hist2')||'[]');}catch{}
 
-function switchTab(t){
-  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='leads')||(i===1&&t==='history')));
-  document.getElementById('view-leads').classList.toggle('active',t==='leads');
-  document.getElementById('view-history').classList.toggle('active',t==='history');
-  if(t==='history') renderHistory();
+// ── BACKGROUND PARALLAX ──
+document.addEventListener('mousemove',e=>{
+  const x=(e.clientX/window.innerWidth-.5)*30;
+  const y=(e.clientY/window.innerHeight-.5)*30;
+  document.getElementById('g1').style.transform=`translate(${x*.8}px,${y*.8}px)`;
+  document.getElementById('g2').style.transform=`translate(${-x*.6}px,${-y*.6}px)`;
+  document.getElementById('g3').style.transform=`translate(calc(-50% + ${x*.4}px),calc(-50% + ${y*.4}px))`;
+});
+
+// ── POPULATE USER SELECT IN MODAL ──
+const userSel=document.getElementById('import-user-input');
+USERS.forEach(u=>{const o=document.createElement('option');o.value=u;o.textContent=u;userSel.appendChild(o);});
+
+// ── NAVIGATION ──
+function goHome(){
+  document.getElementById('view-import').classList.remove('active');
+  document.getElementById('view-home').classList.add('active');
+  leads=[];idc=0;importName='';
+  renderHome();
 }
 
+// ── MODAL ──
+function openNewImportModal(){
+  document.getElementById('import-name-input').value='';
+  document.getElementById('modal').classList.add('open');
+  setTimeout(()=>document.getElementById('import-name-input').focus(),100);
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+function confirmNewImport(){
+  const name=document.getElementById('import-name-input').value.trim();
+  const user=document.getElementById('import-user-input').value;
+  let valid=true;
+  if(!name){document.getElementById('import-name-input').style.borderColor='#f87171';valid=false;}else{document.getElementById('import-name-input').style.borderColor='';}
+  if(!user){document.getElementById('import-user-input').style.borderColor='#f87171';valid=false;}else{document.getElementById('import-user-input').style.borderColor='';}
+  if(!valid)return;
+  closeModal();
+  startImport(name,user);
+}
+
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+
+function startImport(name,user){
+  importName=name;importedBy=user;leads=[];idc=0;
+  document.getElementById('import-title').textContent=name;
+  document.getElementById('view-home').classList.remove('active');
+  document.getElementById('view-import').classList.add('active');
+  render();
+}
+
+// ── LEADS ──
 function addRow(d={}){
   leads.push({id:++idc,linkedinUrl:'',companyUrl:'',user:'',status:'idle',...d});
   render();
 }
-
 function removeRow(id){leads=leads.filter(l=>l.id!==id);render();}
-
-function clearAll(){
-  if(!leads.length||!confirm('Clear all leads?'))return;
-  leads=[];render();
-}
-
+function clearAll(){if(!leads.length||!confirm('Clear all leads?'))return;leads=[];render();}
 function isValid(l){return l.linkedinUrl.trim()&&l.companyUrl.trim()&&l.user.trim();}
 function esc(s){return(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
 
@@ -185,21 +333,17 @@ function onInput(id,f,el){
   const l=leads.find(l=>l.id===id);if(!l)return;
   l[f]=el.value;
   if(l._t)el.classList.toggle('inv',!el.value.trim());
-  updateFooter();updateBtn();updateBadge();
+  updateFooter();updateBtn();
 }
-
 function onBlur(id,f,el){
   const l=leads.find(l=>l.id===id);if(!l)return;
   l._t=true;l[f]=el.value.trim();el.value=l[f];
-  el.classList.toggle('inv',!l[f]);
-  updateFooter();updateBtn();
+  el.classList.toggle('inv',!l[f]);updateFooter();updateBtn();
 }
-
 function onSelect(id,el){
   const l=leads.find(l=>l.id===id);if(!l)return;
   l._t=true;l.user=el.value;
-  el.classList.toggle('inv',!el.value);
-  updateFooter();updateBtn();updateBadge();
+  el.classList.toggle('inv',!el.value);updateFooter();updateBtn();
 }
 
 function render(){
@@ -222,16 +366,17 @@ function render(){
       <td class="ac"><button class="db" onclick="removeRow(${l.id})">✕</button></td>
     </tr>`;
   }).join('');
-  updateFooter();updateBtn();updateBadge();
+  updateFooter();updateBtn();
+  document.getElementById('import-subtitle').textContent=`${leads.length} lead${leads.length!==1?'s':''} · ${leads.filter(isValid).length} valid`;
 }
 
 function updateFooter(){
   const v=leads.filter(isValid).length;
   document.getElementById('footer-info').textContent=`${leads.length} lead${leads.length!==1?'s':''} · ${v} valid · ${leads.length-v} incomplete`;
 }
-function updateBadge(){document.getElementById('count-badge').textContent=`${leads.length} lead${leads.length!==1?'s':''}`;}
 function updateBtn(){document.getElementById('send-btn').disabled=!(leads.length&&leads.every(isValid));}
 
+// ── CSV ──
 function importCSV(e){
   const file=e.target.files[0];if(!file)return;
   const r=new FileReader();
@@ -254,13 +399,13 @@ function importCSV(e){
   };
   r.readAsText(file);e.target.value='';
 }
-
 function parseCSV(line){
   const res=[];let cur='';let q=false;
   for(const c of line){if(c==='"'){q=!q;}else if(c===','&&!q){res.push(cur);cur='';}else cur+=c;}
   res.push(cur);return res;
 }
 
+// ── SEND ──
 async function sendToHubspot(){
   leads.forEach(l=>l._t=true);
   if(leads.some(l=>!isValid(l))){render();toast('Some rows are incomplete.','error');return;}
@@ -270,9 +415,9 @@ async function sendToHubspot(){
   const results=[];let sent=0;
   for(const lead of leads){
     lead.status='sending';render();
-    const payload={linkedinUrl:lead.linkedinUrl,companyLinkedinUrl:lead.companyUrl,user:lead.user};
+          const payload={importName,importedBy,linkedinUrl:lead.linkedinUrl,companyLinkedinUrl:lead.companyUrl,user:lead.user};
     try{
-      const res=await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json','x-vercel-protection-bypass':'HQ5JV0qhkuqeoAAcOy1vaNIWgxac1dRn'},body:JSON.stringify(payload)});
+      const res=await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json','x-vercel-protection-bypass':BYPASS},body:JSON.stringify(payload)});
       lead.status=res.ok?'sent':'error';
     }catch{lead.status='error';}
     results.push({...payload,status:lead.status});
@@ -281,37 +426,48 @@ async function sendToHubspot(){
   }
   const ok=results.filter(r=>r.status==='sent').length;
   const err=results.filter(r=>r.status==='error').length;
-  hist.unshift({id:Date.now(),date:new Date().toLocaleString('en-GB'),total:results.length,ok,err,leads:results});
-  try{localStorage.setItem('hs_hist',JSON.stringify(hist));}catch{}
-  updateHistoryBadge();
+  hist.unshift({id:Date.now(),name:importName,importedBy,date:new Date().toLocaleString('en-GB'),total:results.length,ok,err,leads:results});
+  try{localStorage.setItem('hs_hist2',JSON.stringify(hist));}catch{}
   btn.textContent='🚀 Send to HubSpot';updateBtn();
-  toast(err===0?`✅ ${ok} lead${ok!==1?'s':''} sent successfully!`:`${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
+  toast(err===0?`✅ ${ok} lead${ok!==1?'s':''} sent!`:`${ok} sent, ${err} error${err!==1?'s':''}.`,err===0?'success':'error');
   setTimeout(()=>{prog.style.width='0%';},1500);
 }
 
-function renderHistory(){
+// ── HOME ──
+function renderHome(){
+  const totalImports=hist.length;
+  const totalLeads=hist.reduce((a,b)=>a+b.total,0);
+  const totalErrors=hist.reduce((a,b)=>a+b.err,0);
+  document.getElementById('stat-imports').textContent=totalImports;
+  document.getElementById('stat-leads').textContent=totalLeads;
+  document.getElementById('stat-errors').textContent=totalErrors;
+  document.getElementById('hist-count').textContent=hist.length;
+
   const list=document.getElementById('history-list');
-  document.getElementById('history-empty').style.display=hist.length?'none':'block';
+  const empty=document.getElementById('history-empty');
+  empty.style.display=hist.length?'none':'block';
+
   list.innerHTML=hist.map(b=>`
-    <div class="batch" id="b${b.id}">
-      <div class="bh" onclick="toggleBatch(${b.id})">
-        <div style="flex:1">
-          <div class="bt">Send · ${b.total} lead${b.total!==1?'s':''}</div>
-          <div class="bd-date">${b.date}</div>
+    <div class="batch-card" id="bc${b.id}">
+      <div class="batch-card-header" onclick="toggleBatch(${b.id})">
+        <div class="batch-card-icon">📦</div>
+        <div class="batch-card-info">
+          <div class="batch-card-name">${esc(b.name)}</div>
+          <div class="batch-card-date">${b.date} · by <strong style="color:#e2e8f0">${esc(b.importedBy||'—')}</strong></div>
         </div>
-        <div class="bs">
-          <span class="sp sp-tot">${b.total} total</span>
-          ${b.ok?`<span class="sp sp-ok">✅ ${b.ok} ok</span>`:''}
-          ${b.err?`<span class="sp sp-err">❌ ${b.err} error${b.err!==1?'s':''}</span>`:''}
+        <div class="batch-pills">
+          <span class="pill pill-total">${b.total} leads</span>
+          ${b.ok?`<span class="pill pill-ok">✅ ${b.ok}</span>`:''}
+          ${b.err?`<span class="pill pill-err">❌ ${b.err}</span>`:''}
         </div>
-        <span class="bc">▶</span>
+        <span class="batch-chevron">▶</span>
       </div>
-      <div class="bb">
-        <table class="bt2">
+      <div class="batch-body">
+        <table class="batch-tbl">
           <thead><tr><th>LinkedIn Profile</th><th>Company LinkedIn</th><th>Assignee</th><th>Status</th></tr></thead>
           <tbody>${b.leads.map(l=>`<tr>
-            <td>${esc(l.linkedinUrl)}</td>
-            <td>${esc(l.companyLinkedinUrl)}</td>
+            <td title="${esc(l.linkedinUrl)}">${esc(l.linkedinUrl)}</td>
+            <td title="${esc(l.companyLinkedinUrl)}">${esc(l.companyLinkedinUrl)}</td>
             <td>${esc(l.user)}</td>
             <td class="${l.status==='sent'?'s-ok':'s-err'}">${l.status==='sent'?'✅ Sent':'❌ Error'}</td>
           </tr>`).join('')}</tbody>
@@ -320,17 +476,7 @@ function renderHistory(){
     </div>`).join('');
 }
 
-function toggleBatch(id){document.getElementById(`b${id}`).classList.toggle('open');}
-
-function clearHistory(){
-  if(!hist.length||!confirm('Clear all history?'))return;
-  hist=[];try{localStorage.setItem('hs_hist','[]');}catch{}
-  renderHistory();updateHistoryBadge();
-}
-
-function updateHistoryBadge(){
-  document.getElementById('htab').textContent=hist.length?`🕓 History (${hist.length})`:'🕓 History';
-}
+function toggleBatch(id){document.getElementById(`bc${id}`).classList.toggle('open');}
 
 function toast(msg,type='info'){
   const w=document.getElementById('toast-wrap');
@@ -338,7 +484,7 @@ function toast(msg,type='info'){
   w.appendChild(el);setTimeout(()=>el.remove(),4000);
 }
 
-render();updateHistoryBadge();
+renderHome();
 </script>
 </body>
 </html>
