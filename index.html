@@ -448,7 +448,13 @@ td.ac{width:38px;text-align:center}
               <button onclick="calNav(1)" style="background:rgba(255,255,255,.07);border:1px solid var(--b);border-radius:8px;width:28px;height:28px;color:var(--t2);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center">›</button>
             </div>
             <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px">
-              ${['Mo','Tu','We','Th','Fr','Sa','Su'].map(d=>`<div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">${d}</div>`).join('')}
+              <div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">Mo</div>
+              <div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">Tu</div>
+              <div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">We</div>
+              <div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">Th</div>
+              <div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">Fr</div>
+              <div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">Sa</div>
+              <div style="text-align:center;font-size:10px;font-weight:700;color:var(--t3);padding:3px 0">Su</div>
             </div>
             <div id="cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px"></div>
           </div>
@@ -662,11 +668,9 @@ function doLogin(){
   const btn=document.getElementById('login-btn');
   if(!pw)return;
   btn.disabled=true;btn.textContent='Signing in…';
-  // Simulate a tiny delay for polish
   setTimeout(()=>{
     if(pw===PASSWORD){
       try{sessionStorage.setItem(SESSION_KEY,'1');}catch{}
-      // Animate out login card
       const card=document.querySelector('.login-card');
       card.style.transition='all .35s cubic-bezier(.4,0,.2,1)';
       card.style.transform='scale(.95) translateY(-16px)';
@@ -701,7 +705,6 @@ function togglePw(){
   if(i.type==='password'){i.type='text';e.textContent='🙈';}
   else{i.type='password';e.textContent='👁';}
 }
-// Auto-login if session exists
 if(checkSession()){
   document.getElementById('view-login').style.display='none';
   document.getElementById('view-app').classList.add('authed');
@@ -858,6 +861,8 @@ function confirmNew(){
 }
 
 // ── CSV ────────────────────────────────────────────────
+const CSV_ROW_LIMIT=100;
+
 function resetCsvZone(){document.getElementById('csv-input').value='';document.getElementById('csv-fname').textContent='Import CSV';document.getElementById('csv-drop').classList.remove('has-file');}
 function onCsvPick(e){const file=e.target.files[0];if(!file)return;document.getElementById('csv-fname').textContent=file.name;document.getElementById('csv-drop').classList.add('has-file');parseCSVFile(file);}
 function parseCSVFile(file){
@@ -867,7 +872,11 @@ function parseCSVFile(file){
     if(lines.length<2){toast('Empty or invalid CSV.','error');resetCsvZone();return;}
     csvRawHeaders=parseCSVLine(lines[0]).map(h=>h.trim());csvRawRows=[];
     for(let i=1;i<lines.length;i++){const c=parseCSVLine(lines[i]);if(c.some(x=>x.trim()))csvRawRows.push(c);}
-    if(!csvRawRows.length){toast('No data rows found.','error');resetCsvZone();return;}
+    if(!csvRawRows.length){toast('Empty or invalid CSV.','error');resetCsvZone();return;}
+    if(csvRawRows.length>CSV_ROW_LIMIT){
+      toast('⚠️ This file contains '+csvRawRows.length+' rows. We only accept CSV files with '+CSV_ROW_LIMIT+' rows or fewer — perfect for creating a targeted HubSpot list. Please split your file and try again.','error');
+      resetCsvZone();return;
+    }
     openMapModal();
   };r.readAsText(file);
 }
@@ -1086,7 +1095,7 @@ function renderHome(){
   buildFUserList();renderHistList(hist);
 }
 function toggleB(id){document.getElementById('bc'+id).classList.toggle('open');}
-function toast(msg,type='info'){const w=document.getElementById('tw');const el=document.createElement('div');el.className='toast '+type;el.textContent=msg;w.appendChild(el);setTimeout(()=>el.remove(),5000);}
+function toast(msg,type='info'){const w=document.getElementById('tw');const el=document.createElement('div');el.className='toast '+type;el.textContent=msg;w.appendChild(el);setTimeout(()=>el.remove(),7000);}
 
 if(checkSession())renderHome();
 </script>
