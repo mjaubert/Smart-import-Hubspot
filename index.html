@@ -936,10 +936,10 @@ function renderHistList(items){
         <span class="bcard-chev">▶</span>
       </div>
       <div class="bcard-bd">
+        ${hasErr?`<div class="bcard-actions"><button class="btn btn-warning btn-sm" onclick="event.stopPropagation();retryImport(${b.id})">🔄 Retry ${b.err} failed lead${b.err!==1?'s':''}</button><span style="font-size:12px;color:var(--t3);margin-left:4px">Will be resent with the same configuration</span></div>`:''}
         <table class="btbl"><thead><tr><th>First</th><th>Last</th><th>LinkedIn</th><th>Company</th><th>Job Title</th><th>Owner</th><th>Status</th></tr></thead>
           <tbody>${b.leads.map(l=>`<tr><td>${esc(l.firstName||'')}</td><td>${esc(l.lastName||'')}</td><td title="${esc(l.linkedinUrl)}">${esc(l.linkedinUrl)}</td><td title="${esc(l.companyLinkedinUrl)}">${esc(l.companyLinkedinUrl)}</td><td>${esc(l.jobTitle||'—')}</td><td>${esc(l.ownerName||'')}</td><td class="${l.status==='sent'?'s-ok':'s-err'}">${l.status==='sent'?'✅ Sent':'❌ Error'}</td></tr>`).join('')}</tbody>
         </table>
-        ${hasErr?`<div class="bcard-actions"><button class="btn btn-warning btn-sm" onclick="event.stopPropagation();retryImport(${b.id})">🔄 Retry ${b.err} failed lead${b.err!==1?'s':''}</button><span style="font-size:12px;color:var(--t3);margin-left:4px">${b.err} error${b.err!==1?'s':''} will be resent with the same configuration</span></div>`:''}
       </div>
     </div>`;
   }).join('');
